@@ -26,14 +26,14 @@ class Solution {
                 lo=mid+1;
             }
         }
-        System.out.println(ans);
+     //   System.out.println(ans);
     
        
         int bs1 = bs1(arr,0,ans,target+0.5);
         if(bs1!=-1 && arr.get(bs1)==target)return bs1;
          
          int bs = bs(arr,ans+1,arr.length()-1,target+0.5);
-                System.out.print(bs+" "+bs1);
+     //           System.out.print(bs1+" "+bs);
 
         if(bs!=-1 && bs<arr.length() && arr.get(bs)==target)
             return bs;
@@ -54,12 +54,28 @@ public int bs1(MountainArray arr,int lo,int hi,double target)
         else
             hi=mid-1;
     }
-    
+   // System.out.println(lo);
     return lo-1;
 }
     
-    public int bs(MountainArray arr,int hi,int lo,double target)
+    public int bs(MountainArray arr,int lo,int hi,double target)
     {
+          while(lo<=hi)
+    {
+        int mid = lo + (hi-lo)/2;
+              
+              System.out.println(lo+" "+hi+" "+mid);
+
+        if(arr.get(mid)>target)
+        {
+            lo=mid+1;
+        }
+        else
+            hi=mid-1;
+    }
+ //   System.out.println(hi);
+    return hi+1;
+        /*
         while(hi<=lo)
         {
             int mid =hi + (lo-hi)/2;
@@ -72,6 +88,8 @@ public int bs1(MountainArray arr,int lo,int hi,double target)
         }
         
         return hi;
+        
+        */
     }
     
     
