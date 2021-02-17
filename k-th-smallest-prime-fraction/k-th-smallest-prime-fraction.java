@@ -1,5 +1,18 @@
 class Solution {
+    
+    public class Pair
+    {
+        int a;
+        int b;
+        Pair(int a,int b)
+        {
+            this.a=a;
+            this.b=b;
+        }
+    }
+    
     public int[] kthSmallestPrimeFraction(int[] arr, int k) {
+        /*
         double lo=0;
         double hi=1;
         int[] ans = new int[2];
@@ -38,5 +51,34 @@ class Solution {
             
         }
         
+        */
+        
+        PriorityQueue<Pair> pq = new PriorityQueue<Pair>((a,b)->(arr[a.a]*arr[b.b]-arr[a.b]*arr[b.a]));
+        
+        for(int j=arr.length-1;j>=0;j--)
+        {
+            Pair p =  new Pair(0,j);
+            pq.add(p);
+        }
+        
+        while(k!=1)
+        {
+            Pair p = pq.poll();
+            int a = p.a;
+            int b = p.b;
+            a=a+1;
+            k--;
+            if(a>=b)
+                continue;
+            pq.add(new Pair(a,b));
+        }
+        
+        int[] ans = new int[2];
+        Pair p1 =pq.peek();
+        ans[0]=arr[p1.a];
+        ans[1]=arr[p1.b];
+        
+        
+        return ans;
     }
 }
