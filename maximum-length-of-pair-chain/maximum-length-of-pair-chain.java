@@ -20,7 +20,7 @@ class Solution {
             p[i]=p1;
         }
         
-        Arrays.sort(p,(a,b)->(a.a-b.a));
+        Arrays.sort(p,(a,b)->(a.b-b.b));
         
         int[] arr= new int[p.length];
         int res=0;
