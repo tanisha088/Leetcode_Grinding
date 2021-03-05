@@ -3,11 +3,9 @@ class Solution {
        
         for(int i=nums.length-2;i>=0;i--)
         {
-            int minval=Integer.MAX_VALUE;
+            int minval=nums.length;
             for(int j=1;j<=nums[i];j++)
             {
-               if(nums[j+i]==Integer.MAX_VALUE)
-                   continue;
                 if(j+i>=nums.length-1)
                 {
                     minval=1;
