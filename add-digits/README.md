@@ -1,3 +1,4 @@
+[Discussion Post (created on 22/2/2021 at 12:0)](https://leetcode.com/problems/add-digits/solution/)  
 <h2>258. Add Digits</h2><h3>Easy</h3><hr><div><p>Given an integer <code>num</code>, repeatedly add all its digits until the result has only one digit, and return it.</p>
 
 <p>&nbsp;</p>
