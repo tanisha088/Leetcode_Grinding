@@ -17,7 +17,11 @@ class Solution {
     public List<Integer> preorderTraversal(TreeNode root) {
           
         LinkedList<Integer> ll = new LinkedList<Integer>();
+      
         
+        // CASE  I ::::::::
+// ITERATIVE USING MORRIS FUNCTIONALITY/ ALGORITHM
+        /*
         while(root!=null)
         {
             
@@ -46,6 +50,31 @@ class Solution {
                 }
                 
             }
+        }
+        
+        */
+        // CASE II :::  USING STACK ::: 
+        
+             Stack<TreeNode> st= new Stack<TreeNode>();
+        
+        st.push(root);
+      
+        if(root==null)
+            return ll;
+         ll.add(root.val);
+        TreeNode curr =root.left;
+        while(!st.isEmpty() || curr!=null)
+        {
+
+            while(curr!=null)
+            {
+               st.push(curr);
+                ll.add(curr.val);
+                curr=curr.left;
+            }
+            TreeNode n = st.pop();
+            curr = n.right;
+           
         }
         
         return ll;
