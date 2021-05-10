@@ -15,8 +15,11 @@
  */
 class Solution {
     public List<Integer> postorderTraversal(TreeNode root) {
+    
          LinkedList<Integer> ll = new LinkedList<Integer>();
-        
+    
+        // 1ST APPROACH :::: MORRIS 
+        /*
         while(root!=null)
         {
             ll.add(root.val);
@@ -44,8 +47,31 @@ class Solution {
                              
         }
         
-        Collections.reverse(ll);
+        */
+         
+             Stack<TreeNode> st= new Stack<TreeNode>();
         
+        st.push(root);
+        
+        if(root==null)
+            return ll;
+        ll.add(root.val);
+        TreeNode curr =root.right;
+        while(!st.isEmpty() || curr!=null)
+        {
+            while(curr!=null)
+            {
+               st.push(curr);
+                ll.add(curr.val);
+                curr=curr.right;
+            }
+            TreeNode n = st.pop();
+            curr = n.left;
+           
+        }
+        
+                Collections.reverse(ll);
+
         return ll;
     }
 }
