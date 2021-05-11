@@ -18,11 +18,13 @@ class Solution {
         LinkedList<TreeNode> ll = new LinkedList<TreeNode>();
         
         LinkedList<Integer> vals=  new LinkedList<Integer>();
-        
+             List<List<Integer>> ans = new ArrayList<List<Integer>>();
+
         ll.add(root);
+        
+           /*
         vals.add(0);
         int v = -1;
-        List<List<Integer>> ans = new ArrayList<List<Integer>>();
         
         if(root==null)
             return ans;
@@ -55,6 +57,26 @@ class Solution {
         }
         
         ans.add(l1);
+        */
+        
+        if(root==null)
+            return ans;
+        while(!ll.isEmpty())
+        {
+            int size =  ll.size();
+            List<Integer> res = new ArrayList<Integer>();
+            while(size!=0)
+            {
+                TreeNode m = ll.remove();
+                res.add(m.val);
+                if(m.left!=null)
+                    ll.add(m.left);
+                if(m.right!=null)
+                    ll.add(m.right);
+                size--;
+            }
+            ans.add(res);
+        }
         
         return ans;
     }
