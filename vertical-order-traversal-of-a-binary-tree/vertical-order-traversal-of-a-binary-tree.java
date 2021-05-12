@@ -28,7 +28,6 @@ class Pair
 }
      public class Paircomparator implements Comparator<Pair> {
  
-    @Override
     public int compare(Pair p1,Pair p2) {
         
         if(p1.b==p2.b)
