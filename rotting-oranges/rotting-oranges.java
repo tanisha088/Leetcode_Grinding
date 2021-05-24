@@ -3,7 +3,8 @@ class Solution {
         
         LinkedList<int[]> list = new LinkedList<int[]>();
         HashSet<String> set=new HashSet<String>();
-        int coo =0;
+        int  rotten=0;
+        int fresh=0;
         for(int i=0;i<grid.length;i++)
         {
             for(int j=0;j<grid[0].length;j++)
@@ -14,17 +15,24 @@ class Solution {
                 {
                     list.add(new int[]{i,j});
                     set.add(i+" "+j);
+                    rotten++;
                  }
-                coo++;
+                else
+                   fresh++;
+               
             }
         }
         int ans=0;
-        if(coo==0)
+   
+          int coo=  rotten+fresh;
+          
+        if(fresh==0)
             return 0;
-        if(list.isEmpty())
-            return -1;
-       if(list.size()==coo)
-           return 0;
+        
+        if(rotten==0)
+            return -1; 
+      
+      
         while(!list.isEmpty())
         {
             int size=list.size();
