@@ -20,12 +20,45 @@ class Solution {
         
        // FIRST APPROACH ::::
    // int a =maxPathSum1(root);
- 
+ // return Math.max(ans,a);
         
         // 2ND APPROACH ::::
-    int a = max(root);
+  //  int a = max(root);
+        // return Math.max(ans,a);
         
-        return Math.max(ans,a);
+        // 3RD APPROACH ::
+       return maxfn(root)[1];
+        
+       
+    }
+    
+    
+    public int[] maxfn(TreeNode root)
+    {
+        if(root==null)
+        {
+            return new int[]{0,Integer.MIN_VALUE};
+        }
+        
+        int[] v1 = maxfn(root.left);
+        int[] v2 = maxfn(root.right);
+        
+        int tot=root.val;
+        
+        if(v1[0]<0)
+            v1[0]=0;
+        if(v2[0]<0)
+            v2[0]=0;
+        
+        tot += v1[0]+v2[0];
+        
+        int[] ans= new int[2];
+        
+        ans[1] =  Math.max(v1[1], Math.max(v2[1],tot));
+        
+        ans[0] = Math.max(v1[0],v2[0])+root.val;
+        
+        return ans;
     }
     
     public int max(TreeNode root)
