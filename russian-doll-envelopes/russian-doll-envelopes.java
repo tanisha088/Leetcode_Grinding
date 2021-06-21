@@ -21,6 +21,8 @@ class Solution {
             array[i]=p;
             arr[i]=1;
         }
+        int res=0;
+        /*
                    Arrays.sort(array, (p1, p2) -> p1.a-p2.a);
 
         int res=1;
@@ -38,5 +40,64 @@ class Solution {
         }
         
         return res;
+        */
+        
+        
+        /*
+        Arrays.sort(array,(p1,p2)-> ((p1.a==p2.a)?(p2.b-p1.b):p1.a-p2.a));
+        arr[0]=array[0].b;
+        for(int i=1;i<array.length;i++)
+        {
+            int in = bis(arr,0,res,array[i].b);
+            System.out.println(array[i].b+" "+in);
+            arr[in]=array[i].b;
+            res=Math.max(in,res);
+        }
+        */
+        
+         Arrays.sort(array,(p1,p2)-> ((p1.a==p2.a)?(p2.b-p1.b):p1.a-p2.a));
+        int[] ans = new int[array.length];
+        ans[0]=array[0].b;
+         res=0;
+        for(int i=1;i<array.length;i++)
+        {
+            int in = bins(ans,0,res,array[i].b);
+            ans[in]=array[i].b;
+            res=Math.max(in,res);
+        }
+        
+        return res+1;
     }
+    
+    public int bins(int[] array,int lo,int hi,int el)
+    {
+        while(lo<=hi)
+        {
+            int mid = lo+ (hi-lo)/2;
+            if(array[mid]==el)
+                return mid;
+            if(array[mid]>el)
+                hi=mid-1;
+            else
+                lo=mid+1;
+        }
+        
+        return lo;
+    }
+    
+    public int bis(int[] arr,int lo,int hi,int el)
+    {
+        while(lo<=hi)
+        {
+            int mid=lo + (hi-lo)/2;
+            if(arr[mid]<el)
+                lo=mid+1;
+            else
+                hi=mid-1;
+                
+        }
+        
+        return lo;
+    }
+    
 }
