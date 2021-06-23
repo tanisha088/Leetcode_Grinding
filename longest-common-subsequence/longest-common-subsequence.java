@@ -24,7 +24,7 @@ class Solution {
         return dp[text1.length()][text2.length()];
         */
         
-        
+     /*
         int[][] arr= new int[text1.length()+1][text2.length()+1];
         for(int i=1;i<text1.length()+1;i++)
         {
@@ -41,5 +41,39 @@ class Solution {
         
         return arr[text1.length()][text2.length()];
     }
+   
     
+      */
+        
+        
+        
+        
+    int[] dp = new int[text2.length()+1];
+        
+        for(int i=1;i<=text1.length();i++)
+        {
+            int prev=0;
+            for(int j=1;j<=text2.length();j++)
+            {
+                int prev1 = dp[j];
+                if(text2.charAt(j-1)==text1.charAt(i-1))
+                {
+                    dp[j]=prev+1;
+                }
+                else
+                {
+                    dp[j] = Math.max(dp[j],dp[j-1]);
+                }
+                
+                prev= prev1;
+            }
+            
+            for(int j=0;j<=text2.length();j++)
+                System.out.print(dp[j]+" ");
+            
+            System.out.println();
+        }
+        
+        return dp[text2.length()];
+}
 }
