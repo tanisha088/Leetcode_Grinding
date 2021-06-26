@@ -19,11 +19,11 @@ class Solution {
         int j= i-1;
         int el = m.charAt(i-1)-'0';
         
-        i=m.length()-1;
-        while(i>j && (m.charAt(i)-'0')<=el)
-            i--;
-        
         char[] arr= m.toCharArray();
+        
+         i = binsearch(j+1,arr.length-1,el,arr);
+        
+        
         
         char t=arr[i];
         arr[i]=arr[j];
@@ -46,5 +46,30 @@ class Solution {
             return -1;
         else
             return (int)mstr;
+    }
+    
+    public int binsearch(int low,int high,int el,char[] arr)
+    {
+        
+        int ind=-1;
+        while(low<=high)
+        {
+            int mid = low+(high-low)/2;
+            if(arr[mid]-'0'>el)
+            {
+                if(mid>ind)
+                {
+                   ind = mid;
+                }
+                    low=mid+1;
+            }
+                else
+                {
+                    high=mid-1;
+                }
+
+        }
+        
+        return ind;
     }
 }
