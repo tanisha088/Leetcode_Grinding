@@ -23,7 +23,7 @@ class Solution {
         
        
         LinkedList<Integer> ll = new LinkedList<Integer>();
-         /*
+         
         while(root!=null)
         {
             if(root.left==null)
@@ -45,13 +45,13 @@ class Solution {
                 else
                 {
                     ll.add(root.val);
+                    node.right=null;
                     root = root.right;
                 }
             }
         }
         
-        */
-        
+        /*        
         // 2ND APPROACH USING STACK ::::::::
         
              Stack<TreeNode> st= new Stack<TreeNode>();
@@ -62,7 +62,7 @@ class Solution {
             return ll;
         
         TreeNode curr =root.left;
-        while(!st.isEmpty() || curr!=null)
+        while(!st.isEmpty())
         {
             while(curr!=null)
             {
@@ -74,7 +74,9 @@ class Solution {
             curr = n.right;
            
         }
-        
+         */
         return ll;
+        
     }
+   
 }
