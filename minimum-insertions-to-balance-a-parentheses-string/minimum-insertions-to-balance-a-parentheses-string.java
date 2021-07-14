@@ -40,7 +40,7 @@ class Solution {
             i++;
          //   System.out.println(st +" "+count+" "+i);
         }
-        
+        /*
         while(!st.isEmpty())
         {
             char c =st.pop();
@@ -59,8 +59,9 @@ class Solution {
                 }
             }
         }
+        */
         
-        return count;
+        return count+ st.size()*2;
     }
 }
 
