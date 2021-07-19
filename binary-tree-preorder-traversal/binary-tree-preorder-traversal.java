@@ -52,7 +52,7 @@ class Solution {
             }
         }
         
-        */
+        
         // CASE II :::  USING STACK ::: 
         
              Stack<TreeNode> st= new Stack<TreeNode>();
@@ -77,6 +77,41 @@ class Solution {
            
         }
         
+        return ll;
+        */
+        
+           while(root!=null)
+        {
+            
+                 
+
+            if(root.left==null)
+            {
+                                   ll.add(root.val);
+
+                root=root.right;
+            }
+            else
+            {
+                TreeNode node =  root.left;
+                while(node.right!=null && node.right!=root)
+                  node=node.right;
+                
+                if(node.right==null)
+                {
+                           ll.add(root.val);
+
+                    node.right =root;
+                    root = root.left;
+                }
+                else
+                {
+                    root = root.right;
+                   
+                }
+                
+            }
+        }
         return ll;
     }
 }
