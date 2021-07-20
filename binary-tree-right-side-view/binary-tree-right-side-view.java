@@ -17,7 +17,8 @@ class Solution {
     
     int max=0;
     public List<Integer> rightSideView(TreeNode root) {
-        
+      
+        // 3 DIFFERENT APPROACHES SE KARA HAI !!!!!!!!!!!!!!!!!!!
       
         LinkedList<Integer> ans = new LinkedList<Integer>();
         LinkedList<TreeNode> ll= new LinkedList<TreeNode>();
@@ -101,11 +102,30 @@ class Solution {
         }
         */
         
-        rightview(root,0,ans);
+        
+        // 3RD APPROACH ---> USING  NRL (NODE ROOT LEFT)
+    //    rightview(root,0,ans);
+        rightview(root,new int[]{-1},0,ans);
         return ans;
         
     }
     
+        public void rightview(TreeNode root,int[] max,int le,LinkedList<Integer> ans)
+        {
+            if(root==null)
+                return;
+            
+        //    System.out.println(max[0]+" "+le+" "+root.val);
+            if(le>max[0])
+            ans.add(root.val);
+            max[0] = Math.max(max[0],le);
+            rightview(root.right,max,le+1,ans);
+            rightview(root.left,max,le+1,ans);
+            
+        }
+
+    
+    /*
     public void rightview(TreeNode root,int le,LinkedList<Integer> ans)
     {
         if(root==null)
@@ -121,4 +141,5 @@ class Solution {
         rightview(root.right,le+1,ans);
         rightview(root.left,le+1,ans);
     }
+    */
 }
