@@ -17,6 +17,29 @@ class Solution {
    int ans= Integer.MIN_VALUE;
     public int maxPathSum(TreeNode root) {
      
+        int[] a1 =  new int[]{Integer.MIN_VALUE};
+       int m =  maxsum(root,a1);
+        return Math.max(m,a1[0]);
+    }
+    
+    public int maxsum(TreeNode root,int[] ans)
+    {
+        if(root==null)
+            return 0;
+        
+        // lsum+node , rsum+node , just node
+        
+        int sum1 = maxsum(root.left,ans);
+        int sum2 = maxsum(root.right,ans);
+        
+        int max = Math.max(sum1+root.val,Math.max(sum2+root.val,root.val));
+        
+        ans[0]=Math.max(root.val+sum1+sum2,Math.max(ans[0],max));
+        
+        return max;
+    }
+        
+        /*
         
        // FIRST APPROACH ::::
    // int a =maxPathSum1(root);
@@ -94,5 +117,5 @@ class Solution {
         
     }
     
-   
+   */
 }
