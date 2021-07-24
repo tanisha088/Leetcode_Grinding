@@ -1,3 +1,4 @@
+[Discussion Post (created on 24/6/2021 at 23:1)](https://leetcode.com/problems/describe-the-painting/discuss/1360033/O(N)-Java-solution)  
 <h2>1943. Describe the Painting</h2><h3>Medium</h3><hr><div><p>There is a long and thin painting that can be represented by a number line. The painting was painted with multiple overlapping segments where each segment was painted with a <strong>unique</strong> color. You are given a 2D integer array <code>segments</code>, where <code>segments[i] = [start<sub>i</sub>, end<sub>i</sub>, color<sub>i</sub>]</code> represents the <strong>half-closed segment</strong> <code>[start<sub>i</sub>, end<sub>i</sub>)</code> with <code>color<sub>i</sub></code> as the color.</p>
 
 <p>The colors in the overlapping segments of the painting were <strong>mixed</strong> when it was painted. When two or more colors mix, they form a new color that can be represented as a <strong>set</strong> of mixed colors.</p>
