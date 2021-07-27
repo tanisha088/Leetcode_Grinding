@@ -64,6 +64,7 @@ class Solution {
             
        //     3RD SOLUTION-- -> 
 
+        /*
           if(head==null || head.next==null)
               return head;
              ListNode dummy = new ListNode(0);
@@ -81,7 +82,35 @@ class Solution {
             }
         
         return dummy.next;
+        */
+        return reverse1(head);
     }
+      public ListNode reverse(ListNode head)
+    {
+       if(head==null || head.next==null)
+           return head;
+        
+        ListNode k1 = reverse(head.next);
+        ListNode nnode = head.next;
+        nnode.next=head;
+        head.next=null;
+        return k1;
+           
+    }
+    
+     public ListNode reverse1(ListNode head)
+    {
+        if(head==null || head.next==null)
+            return head;
+         
+         ListNode k = reverse(head.next);
+         ListNode next = head.next;
+         next.next = head;
+         head.next =null;
+         
+         return k;
+    }
+    
     
     public ListNode reverseLists(ListNode prev,ListNode curr)
     {
