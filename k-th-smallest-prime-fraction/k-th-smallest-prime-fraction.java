@@ -10,8 +10,11 @@ class Solution {
             this.b=b;
         }
     }
-    
+
     public int[] kthSmallestPrimeFraction(int[] arr, int k) {
+        
+// 1ST APPROACH - USING BS 
+        // 2ND APPROACH - USING PRIORITY QUEUE
         /*
         double lo=0;
         double hi=1;
@@ -52,33 +55,51 @@ class Solution {
         }
         
         */
+ //***********************************************************************************************
+      //  2ND APPROACH -----
         
-        PriorityQueue<Pair> pq = new PriorityQueue<Pair>((a,b)->(arr[a.a]*arr[b.b]-arr[a.b]*arr[b.a]));
+//         PriorityQueue<Pair> pq = new PriorityQueue<Pair>((a,b)->(arr[a.a]*arr[b.b]-arr[a.b]*arr[b.a]));
         
-        for(int j=arr.length-1;j>=0;j--)
+//         for(int j=arr.length-1;j>0;j--)
+//         {
+//             Pair p =  new Pair(0,j);
+//             pq.add(p);
+//         }
+        
+//         while(k!=1)
+//         {
+//             Pair p = pq.poll();
+//             int a = p.a;
+//             int b = p.b;
+//             a=a+1;
+//             k--;
+//             if(a>=b)
+//                 continue;
+//             pq.add(new Pair(a,b));
+//         }
+        
+//         int[] ans = new int[2];
+//         Pair p1 =pq.peek();
+//         ans[0]=arr[p1.a];
+//         ans[1]=arr[p1.b];
+        
+        
+//         return ans;
+        
+        PriorityQueue<Pair> pq = new PriorityQueue<Pair>((a,b)->(arr[a.a]*arr[b.b] - arr[b.a]*arr[a.b]));
+        
+        for(int i=1;i<arr.length;i++)
+            pq.add(new Pair(0,i));
+        
+        for(int i=0;i<k-1;i++)
         {
-            Pair p =  new Pair(0,j);
-            pq.add(p);
+            Pair p1 = pq.remove();
+            if(p1.a +1 < p1.b)
+            {
+                pq.add(new Pair(p1.a+1,p1.b));
+            }
         }
         
-        while(k!=1)
-        {
-            Pair p = pq.poll();
-            int a = p.a;
-            int b = p.b;
-            a=a+1;
-            k--;
-            if(a>=b)
-                continue;
-            pq.add(new Pair(a,b));
-        }
-        
-        int[] ans = new int[2];
-        Pair p1 =pq.peek();
-        ans[0]=arr[p1.a];
-        ans[1]=arr[p1.b];
-        
-        
-        return ans;
+        return new int[]{arr[pq.peek().a],arr[pq.peek().b]};
     }
 }
