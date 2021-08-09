@@ -18,29 +18,44 @@ class Solution {
             if(a.equals(endWord))
                 return ans;
       
-            char[] charray= a.toCharArray();
-            for(int i=0;i<a.length();i++)
-            {
-              char orig=  charray[i];
-                for(int j=0;j<26;j++)
-                {
+//             char[] charray= a.toCharArray();
+//             for(int i=0;i<a.length();i++)
+//             {
+//               char orig=  charray[i];
+//                 for(int j=0;j<26;j++)
+//                 {
                    
-                    charray[i]=(char)(j+'a');
-                    String s1 = String.valueOf(charray);
-                    // String s1 = new String(charray);
+//                     charray[i]=(char)(j+'a');
+//                     String s1 = String.valueOf(charray);
+//                     // String s1 = new String(charray);
                     
-                 //   System.out.println(s1);
-                    if(!wordlists.contains(s1))
-                        continue;
+//                  //   System.out.println(s1);
+//                     if(!wordlists.contains(s1))
+//                         continue;
                         
-                    if(!set.contains(s1))
-                    list.add(s1);
-                    set.add(s1);
+//                     if(!set.contains(s1))
+//                     list.add(s1);
+//                     set.add(s1);
                 
+//                 }
+                
+//                 charray[i]=orig;
+                
+                for(int i=0;i<26;i++)
+                {
+                    for(int j=0;j<a.length();j++)
+                    {
+                        StringBuilder sb = new StringBuilder(a);
+                        
+                        sb.replace(j,j+1,(""+(char)(i+'a')));
+                        
+                        String k1 = sb.toString();
+                        if(wordlists.contains(k1) && !set.contains(k1))
+                            list.add(k1);
+                        set.add(k1);
+                    }
                 }
-                
-                charray[i]=orig;
-            }
+//    }
                 s--;
             }
     //        System.out.println("(((((((())))))))");
