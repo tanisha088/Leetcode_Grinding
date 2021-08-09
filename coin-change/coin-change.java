@@ -59,20 +59,24 @@ class Solution {
         
         int[] res =new int[amount+1];
         res[0]=0;
+        for(int i=1;i<res.length;i++)
+            res[i]=Integer.MAX_VALUE;
         
-        for(int i=1;i<amount+1;i++)
+        for(int i=1;i<coins.length+1;i++)
         {
-            int max= Integer.MAX_VALUE;
-            for(int j=0;j<coins.length;j++)
+           
+            for(int j=1;j<amount+1;j++)
             {
-                if(coins[j]>i)
+                if(coins[i-1]>j || res[j-coins[i-1]]==Integer.MAX_VALUE)
                     continue;
                 
-                if(res[i-coins[j]]!=Integer.MAX_VALUE)
-                max= Math.min(max,res[i-coins[j]]+1);
+              //  if(res[i-coins[j]]!=Integer.MAX_VALUE)
+              
+                
+               res[j] = Math.min(res[j],res[j-coins[i-1]]+1);
             }
             
-            res[i]=max;
+       //     res[i]=max;
         }
         
         
