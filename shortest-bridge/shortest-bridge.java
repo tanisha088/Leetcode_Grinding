@@ -34,7 +34,7 @@ LinkedList<int[]> list= new LinkedList<int[]>();
     public void dfs(int i,int j,int[][] grid,boolean[][] visited,LinkedList<int[]> list)
     {
         visited[i][j]=true;
-     //1->   grid[i][j]=2;
+        grid[i][j]=2;
         list.add(new int[]{i,j});
         int[] x={-1,0,0,1};
         int[] y={0,1,-1,0};
@@ -65,7 +65,8 @@ LinkedList<int[]> list= new LinkedList<int[]>();
                 int cx = cor[0];
                 int cy = cor[1];
         
-                
+                if(grid[cx][cy]==1)
+                    return ans;
             //    System.out.println(cx+" "+cy+" "+grid[cx][cy]);
          
                         visited[cx][cy]=true;
