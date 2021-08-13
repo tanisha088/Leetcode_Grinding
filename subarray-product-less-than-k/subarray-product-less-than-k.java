@@ -24,22 +24,70 @@ class Solution {
      //       System.out.println(prod[i]+"***");
         }
         */
-        int ans=0;
-        int st=0;
-         long mul = 1;
-        for(int i=0;i<nums.length;i++)
-        {
-            mul  = mul*nums[i];
-            while(mul>=k && st<=i)
-            {
-                mul= mul/nums[st];
-                 st++;
-            }
+//         int ans=0;
+//         int st=0;
+//          long mul = 1;
+//         for(int i=0;i<nums.length;i++)
+//         {
+//             mul  = mul*nums[i];
+//             while(mul>=k && st<=i)
+//             {
+//                 mul= mul/nums[st];
+//                  st++;
+//             }
             
-            ans+=i-st+1;
-          //  System.out.println(st+" "+i+" "+mul);
-        }
+//             ans+=i-st+1;
+//           //  System.out.println(st+" "+i+" "+mul);
+//         }
        
-        return ans;
+//         return ans;
+        
+
+/*
+
+i=0
+st=0
+
+while(prod<k && st<arr.length)
+   prod=prod*arr[st++]
+   
+res=res+st-i;
+i=i+1
+while(prod>k && i<arr.length)
+   prod=prod/i++;
+
+*/
+        
+        if(k<2)
+            return (0);
+        
+        int end=0;
+        int st=0;
+        int prod = 1;
+        int res=0;
+        while(end<nums.length)
+        {
+            prod = prod * nums[end];
+            end++;
+            while(prod>=k)
+            {
+                prod= prod/nums[st];
+                st++;
+            }
+                if(prod<k)
+            res = res+ (end-st);
+        }
+        
+        return res;
+        
     }
 }
+        
+        /*
+        
+      10 5 2 6 
+      
+      +
+      
+        
+        */
