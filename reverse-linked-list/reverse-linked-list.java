@@ -83,8 +83,34 @@ class Solution {
         
         return dummy.next;
         */
-        return reverse1(head);
+      //  return reverse1(head);
+        
+      
+        
+        return rev(head);
+        
+        
     }
+    
+    
+    public ListNode rev(ListNode head)
+    {
+        if(head==null || head.next==null)
+            return head;
+        
+        ListNode retval =  rev(head.next);
+        ListNode next =  head.next;
+        head.next=null;
+        next.next=head;
+        
+        return retval;
+    }
+        
+        
+        
+        
+        
+    
       public ListNode reverse(ListNode head)
     {
        if(head==null || head.next==null)
