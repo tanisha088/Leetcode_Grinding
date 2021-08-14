@@ -42,61 +42,62 @@ class Solution {
 //         list.add(root.val);
 //         inorder(root.right,list);
 //     }
-         Stack<TreeNode> st1=new Stack();
-        Stack<TreeNode> st2 = new Stack();
         
+        if(root==null)
+            return false;
+        
+        Stack<TreeNode> low = new Stack();
+        Stack<TreeNode> hi =  new Stack();
+        TreeNode v1 = null;
+        TreeNode v2 = null;
+        boolean l1 =  false;
+        boolean l2 = false;
         TreeNode r1 = root;
         TreeNode r2 = root;
         
-        boolean t1=false;
-        boolean t2=false;
-        int v1=-1;
-        int v2=-1;
         while(true)
         {
-    
-            while(t1==false)
+            while(l1==false)
             {
-               while(r1!=null)
-               {
-                   st1.push(r1);
-                   r1=r1.left;
-               }
-               
-                TreeNode m = st1.pop();
-              v1= m.val;
-              r1= m.right;
-              t1=true;
+                while(r1!=null)
+                {
+                    low.push(r1);
+                    r1=r1.left;
+                }
+                
+                if(low.isEmpty())
+                    return false;
+                
+                v1 = low.peek();
+                r1 = low.pop().right;
+                l1=true;
             }
             
-            
-            while(t2==false)
+             while(l2==false)
             {
-                  while(r2!=null)
-               {
-                   st2.push(r2);
-                   r2=r2.right;
-               }
-              
-              TreeNode m = st2.pop();
-              v2= m.val;
-              r2= m.left;
-              t2=true;
+                while(r2!=null)
+                {
+                    hi.push(r2);
+                    r2=r2.right;
+                }
+                
+                 if(hi.isEmpty())
+                     return false;
+                 
+                v2 = hi.peek();
+                r2 = hi.pop().left;
+                l2=true;
             }
             
-             if(v1>=v2)
-            return false;
+            if(v1.val>=v2.val)
+                return false;
             
-            if(v1+v2==k && v1!=v2)
-            return true;
-            else if(v1+v2>k)
-            {
-                t2=false;
-            }
+            if(v1.val+v2.val == k)
+                return true;
+            if(v1.val + v2.val < k)
+                l1=false;
             else
-                  t1=false;
-            
-            
+                l2=false;
         }
         
                 
