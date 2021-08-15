@@ -11,40 +11,43 @@
 class Solution {
     public ListNode reverseKGroup(ListNode head, int k) {
         
-        ListNode dummy =  new ListNode(head.val);
+//         ListNode dummy =  new ListNode(head.val);
         
-        dummy.next = head;
-        ListNode prev=dummy;
-        ListNode st = head;
+//         dummy.next = head;
+//         ListNode prev=dummy;
+//         ListNode st = head;
        
         
-        while(st!=null && st.next!=null)
-        {
-         int count = k;
-             ListNode then = st.next;
-            ListNode check = then;
-            int c=0;
-            while(check!=null && c<k-1)
-            {
-                check=check.next;
-                c=c+1;
-            }
+//         while(st!=null && st.next!=null)
+//         {
+//          int count = k;
+//              ListNode then = st.next;
+//             ListNode check = then;
+//             int c=0;
+//             while(check!=null && c<k-1)
+//             {
+//                 check=check.next;
+//                 c=c+1;
+//             }
             
-            if(c<k-1)
-                break;
-        while(count>1 && st!=null && then!=null)
-        {
-            st.next= then.next;
-            then.next = prev.next;
-            prev.next=then;
-            then  = st.next;
-            count--;
-        }
-         prev= st;
-            st=st.next;
-        }
+//             if(c<k-1)
+//                 break;
+//         while(count>1 && st!=null && then!=null)
+//         {
+//             st.next= then.next;
+//             then.next = prev.next;
+//             prev.next=then;
+//             then  = st.next;
+//             count--;
+//         }
+//          prev= st;
+//             st=st.next;
+//         }
         
-        return dummy.next;
+//         return dummy.next;
+        
+        
+        
         
         
 //         ListNode st = head;
@@ -90,6 +93,43 @@ class Solution {
 //         }
         
 //         return head;
+        
+        
+        ListNode node = head;
+        ListNode ans=null;
+        ListNode prev=null;
+        while(node!=null)
+        {
+            ListNode nnode = node;
+            for(int i=0;i<k-1;i++)
+            {
+                nnode = nnode.next;
+              //  System.out.println(nnode+" "+node);
+                if(nnode==null)
+                   return (ans==null)?head:ans;
+            }
+            
+            ListNode next =  nnode.next;
+            nnode.next= null;
+            
+            ListNode last =  reverse(node);
+       //     System.out.println(ans+" "+last);
+            if(ans==null)
+                ans = last;
+            else
+                prev.next=last;
+            node.next = next;
+            prev=node;
+            node = node.next;
+        }
+        
+
+        if(ans==null)ans = head;
+        
+        return ans;
+        
+        
+        
     }
     
     public ListNode reverse(ListNode head)
