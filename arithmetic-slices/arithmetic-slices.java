@@ -1,27 +1,48 @@
 class Solution {
     public int numberOfArithmeticSlices(int[] nums) {
-        int i=0;
-        int j=i+1;
-        int res=0;
-        while(j<=nums.length-1)
+        
+        if(nums.length<3)
+            return 0;
+        
+        int st=0;
+        int end=2;
+        int ans=0;
+        int c=1;
+         int prev= nums[1]-nums[0];
+        
+        while(end<nums.length)
         {
-            int di = nums[i]-nums[j];
-            while(j<nums.length-1)
-            {
-                if(nums[j]-nums[j+1]!=di)
-                    break;
-                j++;
-            }
-            
-        int len = j-i+1;
-            i=j;
-            j=i+1;
-            if(len<=2)
-                continue;
-    //        System.out.println(i+" "+j);
-            res=res+ (len-2)*len + (len-2) - ((((len)*(len+1))/2)-3);
+            int diff =  nums[end]-nums[end-1] ;
+
+               if( prev!=diff )
+                {
+                st=end-1;
+                prev =diff ;
+                c=1;
+                }
+                else if (end-st+1 >=3)
+                {
+                ans =ans+c;
+                c++;
+                }
+                end++;
         }
         
-        return res;
+        return ans;
     }
+    
+    /*
+      2 4 5 6 8 9 10
+      
+      prev=2
+      c=1
+      st=3
+      end=4
+      ans=1
+    */
+    
+    
+    
+    
 }
+
