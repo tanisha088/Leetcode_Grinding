@@ -8,11 +8,14 @@ class Solution {
         for(char c:s.toCharArray())
         {
             if(c=='(')
+            {
                 count++;
+                ans=Math.max(count,ans);
+            }
             else if(c==')')
                 count--;
             
-            ans=Math.max(count,ans);
+            
         }
         
         return ans;
@@ -71,3 +74,15 @@ class Solution {
         */
     }
 }
+
+
+
+/*
+
+(()(( 
+
+2
+
+( ( ( ( ( ( ( ( ) ) ( (   )  ) ( ) ( ( 
+
+*/
