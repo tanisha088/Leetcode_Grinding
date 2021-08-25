@@ -1,49 +1,71 @@
 class Solution {
     public String smallestStringWithSwaps(String s, List<List<Integer>> pairs) {
+       
+        int[] parent = new int[s.length()];
         
-        int[] par = new int[s.length()];
-        for(int i=0;i<par.length;i++)
-            par[i]=i;
+        for(int i=0;i<parent.length;i++)
+            parent[i]=i;
+        
         for(int i=0;i<pairs.size();i++)
         {
-            int  a=pairs.get(i).get(0);
+            int a = pairs.get(i).get(0);
             int b = pairs.get(i).get(1);
             
-            int a1 = find(a,par);
-            int b1 = find(b,par);
-            par[a1]=b1;
+            int pa = find(parent,a);
+            int pb = find(parent,b);
+            
+            parent[pa]=pb;
+            
         }
-        int[] leads = new int[par.length];
-        for(int i=0;i<leads.length;i++)
-            leads[i]=find(i,par);
-        HashMap<Integer,PriorityQueue<Character>> h = new HashMap<Integer,PriorityQueue<Character>>();
         
-      for(int i=0;i<par.length;i++)
-      {
-          int a = leads[i];
-          PriorityQueue<Character> pq = h.getOrDefault(a,new PriorityQueue<Character>());
-          pq.add(s.charAt(i));
-          h.put(a,pq);
-      }
+        HashMap<Integer,StringBuilder> h = new HashMap();
         
-        StringBuilder str1
-            = new StringBuilder("");
-        for(int i=0;i<par.length;i++)
+        for(int i=0;i<s.length();i++)
         {
-           PriorityQueue<Character> pq = h.get(leads[i]);
-            str1.append(pq.remove());
-            h.put(leads[i],pq);
+            int par =  find(parent,i);
+            if(!h.containsKey(par))
+                h.put(par,new StringBuilder(""));
+            
+            h.get(par).append(s.charAt(i)+"");
+            
         }
-        return str1.toString();
+        
+        StringBuilder sb = new StringBuilder("");
+        int[] indices  = new int[parent.length];
+        for(int i=0;i<parent.length;i++)
+        {
+            if(h.containsKey(i))
+            {
+                char[] k =  h.get(i).toString().toCharArray();
+                Arrays.sort(k);
+                
+                StringBuilder sb1  = new StringBuilder("");
+                for(char c:k)
+                    sb1.append(c+"");
+                
+                h.put(i,sb1);
+            }
+        }
+        
+        for(int i=0;i<s.length();i++)
+        {
+            int par = find(parent,i);
+            int ind = indices[par];
+            indices[par]+=1;
+            sb.append(h.get(par).charAt(ind));
+        }
+        
+        return sb.toString();
     }
     
-    public int find(int a,int[] par)
+    public int find(int[] parent,int v)
     {
-        if(par[a]==a)
-            return a;
+        if(parent[v]==v)
+            return v;
         
-        int m= find(par[a],par);
-        par[a]=m;
+        int m =  find(parent,parent[v]);
+        parent[v] = m;
+        
         return m;
     }
 }
