@@ -44,8 +44,9 @@ class Solution {
         }
     }
     */
-        
-        
+    //    return dfs(arr,start);
+        // BFS :::::::::
+        /*
         LinkedList<Integer> list= new LinkedList<Integer>();
         HashSet<Integer> h= new HashSet<Integer>();
         list.add(start);
@@ -67,28 +68,88 @@ class Solution {
                 h.add(a-arr[a]);
                 list.add(a-arr[a]);
             }
+        }
+        
+        return false;
+        */
+        
+        LinkedList<Integer> l =  new LinkedList();
+        HashSet<Integer> set= new HashSet();
+        l.add(start);
+        while(!l.isEmpty())
+        {
+         //   System.out.println(l);
+            int k  =  l.remove();
             
-            /*
-            for(int i=1;i<=arr[a];i++)
+            if(arr[k]==0)
+                return true;
+            
+            int nd = k + arr[k];
+            int nd1 = k-arr[k];
+        //    System.out.println(nd+" "+nd1+" "+set);
+            if(nd<arr.length && !set.contains(nd) )
             {
-                if(i+a>=arr.length)
-                    break;
-                if(!h.contains(i+a))
-                list.add(a+i);
-                h.add(a+i);
+                
+                l.add(nd);
+               
+                set.add(nd);
+                
             }
-             for(int i=1;i<=arr[a];i++)
+            if( nd1>=0 && !set.contains(nd1))
             {
-                if(a-i<0)
-                    break;
-                if(!h.contains(a-i))
-                list.add(a-i);
-                h.add(a-i);
+                 l.add(nd1);
+                set.add(nd1);
             }
-            */
         }
         
         return false;
         
 }
+    
+    public boolean  dfs(int[] arr,int st)
+    {
+        if(st>=arr.length || st<0)
+            return false;
+        
+        if(arr[st]<0)
+            return false;
+        
+        if(arr[st]==0)
+            return true;
+        
+        arr[st]=-arr[st];
+        
+        boolean b1 = dfs(arr,st+arr[st]);   
+        boolean b2 = dfs(arr,st-arr[st]);    
+        
+        return b1||b2;
+    }
 }
+
+
+
+
+/*
+
+
+i+arr[i]=j
+k-arr[k]=j
+
+
+4 3 5 3 7 6 8
+
+-4 -1 -1 3 1 5 5
+
+-1 4 -1 1 5,6 2 5
+
+
+
+
+
+
+
+i-arr[i]=j'
+
+
+
+*/
