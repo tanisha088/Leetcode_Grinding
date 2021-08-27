@@ -14,29 +14,36 @@
  * }
  */
 class Solution {
+    int ans=0;
     public int rob(TreeNode root) {
+       
+        fn(root);
         
-    int[] arr=  fn(root);
-        
-        return Math.max(arr[0],arr[1]);
+        return ans;
     }
     
     public int[] fn(TreeNode root)
     {
         if(root==null)
-            return new int[]{0,0};
+            return new int[2];
         
-        int[] l1 = fn(root.left);
-        int[] r1 = fn(root.right);
+        int[] l =  fn(root.left);
+        int[] r = fn(root.right);
         
-        int v1 = l1[0]+r1[0]+root.val;
-      int v2 = Math.max(l1[1]+r1[1],Math.max(l1[0]+r1[1],Math.max(l1[0]+r1[0],l1[1]+r1[0])));
-         
-        //int v2 = Math.max(l1[0],l1[1])+Math.max(r1[0],r1[1]);
+        int inc =  l[1] + r[1]+root.val;
+        int exc = 0;
         
-        l1[1]=v1;
-        l1[0]=v2;
+        for(int i=0;i<2;i++)
+        {
+            for(int j=0;j<2;j++)
+            {
+                exc = Math.max(exc,l[i]+r[j]);
+            }
+        }
         
-        return l1;
+        ans = Math.max(exc,inc);
+        
+        return new int[]{inc,exc};
+        
     }
 }
