@@ -21,18 +21,18 @@ class Solution {
          Stack<Integer> st= new Stack<Integer>();
         for(int i=0;i<asteroids.length;i++)
         {
-           if(asteroids[i]<0 && !st.isEmpty() && st.peek()>0)
-           {
+            if(asteroids[i]<0 && !st.isEmpty() && st.peek()>0)
+            {
                int m = Math.abs(asteroids[i]);
                while(!st.isEmpty() && st.peek()>0 && st.peek()<m)
                    st.pop();
                
-               if(!st.isEmpty() && st.peek()==m)
-                   st.pop();
-               else if(st.isEmpty() || (st.peek()<m))
+               if(st.isEmpty() || st.peek()<0)
                    st.push(asteroids[i]);
-           }
-            else
+               else if(st.peek()==m)
+                   st.pop();
+            }
+             else
                 st.push(asteroids[i]);
         }
         
