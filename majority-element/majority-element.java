@@ -21,23 +21,69 @@ class Solution {
         return fp;
         */
         
-        int v=nums[0];
-        int c=1;
+//         int v=nums[0];
+//         int c=1;
         
-        for(int i=0;i<nums.length;i++)
+//         for(int i=0;i<nums.length;i++)
+//         {
+//             if(nums[i]==v)
+//                 c++;
+//             else
+//                 c--;
+//             if(c==0)
+//             {
+//                 v=nums[i];
+//                 c=1;
+//             }
+//         }
+        
+//         return v;
+        
+        
+//         int v=nums[0];
+//         int c=1;
+//         int c2=0;
+        
+//         for(int i=1;i<nums.length;i++)
+//         {
+//             if(nums[i]==v)
+//             {
+//               c++;
+//             }
+//             else
+//                 c2++;
+            
+//             if(c2>=c)
+//             {
+//                 v= nums[i];
+//                 c= c2
+//             }
+//         }
+        
+//         return v;
+        
+        int value=nums[0];
+        int count=1;
+        
+        for(int i=1;i<nums.length;i++)
         {
-            if(nums[i]==v)
-                c++;
+            if(value==nums[i])
+                count++;
             else
-                c--;
-            if(c==0)
             {
-                v=nums[i];
-                c=1;
+                if(count==0)
+                {
+                    value = nums[i];
+                    count = 1;
+                }
+                else
+                {
+                    count--;
+                }
             }
         }
         
-        return v;
+        return value;
     }
 }
 
