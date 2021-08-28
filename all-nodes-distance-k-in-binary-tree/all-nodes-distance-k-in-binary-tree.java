@@ -30,8 +30,8 @@ class Solution {
        if(node==null)
            return 0;
        
-       if(k<=0)
-           return 0;
+ //      if(k<=0)
+   //        return 0;
        
        if(node.val==targ.val)
        {
@@ -81,3 +81,15 @@ class Solution {
         bfs(root.right,target,lev-1);
     }
 }
+
+
+/*
+
+
+level order for down wali 
+
+
+
+
+
+*/
