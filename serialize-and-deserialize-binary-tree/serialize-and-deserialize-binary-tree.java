@@ -9,76 +9,63 @@
  */
 public class Codec {
 
-    String serial = "";
-    
+    String str = "";
+    TreeNode head;
+    int i;
     // Encodes a tree to a single string.
     public String serialize(TreeNode root) {
-       serial = "";
+       
         pre(root);
-
-       return serial;
+        return str;
+       
     }
     
     public void pre(TreeNode root)
     {
         if(root==null)
         {
-            serial=serial+"#"+",";
+            str = str +"# ";
             return;
         }
-                serial = serial  +  root.val +",";
+        str = str + root.val +" ";
+        
         pre(root.left);
         pre(root.right);
     }
 
-    int i=0;
     // Decodes your encoded data to tree.
-    
-    public TreeNode cons(String[] sarr,int lim)
-    {
-        if(i>=lim)
-            return null;
-        
-        if(sarr[i].equals("#"))
-        {
-      //      System.out.println(sarr[i]);
-            return null;
-        }
-        TreeNode t = new TreeNode(Integer.parseInt(sarr[i]));
-   //     System.out.println(sarr[i]);
-        i++;
-        t.left = cons(sarr,lim);
-         i++;
-        t.right = cons(sarr,lim);
-        
-
-        return t;
-    }
-    
     public TreeNode deserialize(String data) {
-        String[] sarr =  data.split(",");
-       i=0;
-      
         
+        head = null;
+        i=0;
+        String[] string =  data.split("\\s+");
+        fn(string);
         
-    TreeNode k = cons(sarr,sarr.length);
-            
-return k;
+        return head;
     }
     
-    public void pres(TreeNode k)
+    public TreeNode fn(String[] data)
     {
-        if(k==null)
-            return;
+        if(i==data.length)
+             return null;
         
-   
-        pres(k.left);
-             System.out.println(k.val);
-        pres(k.right);
+        if(data[i].equals("#"))
+             return null;
+        
+        TreeNode node = new TreeNode(Integer.parseInt(data[i]));
+        if(head==null)
+            head=node;
+        i++;
+        
+        node.left =  fn(data);
+        
+        i++;
+        node.right = fn(data);
+        
+        return node;
     }
+        
 }
-
-
 
 // Your Codec object will be instantiated and called as such:
 // Codec ser = new Codec();
