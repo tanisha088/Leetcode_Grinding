@@ -14,6 +14,12 @@
  * }
  */
 class Solution {
+    
+        public int minCameraCover(TreeNode root) {
+
+            // no camera at leaf node , 2 type -> 1. monitored 2. non-monitored 
+    //    }
+    /*
     int ans=0;
     public int minCameraCover(TreeNode root) {
         
@@ -38,7 +44,7 @@ class Solution {
         int b = numcamera(root.right);
         
         // options ::
-     //   0 0  , 0 1 , 0 2 , 1 2 , 1 1 , 2 2
+     //   0 0  , 0 1 , 0 2 , 1 2 , 1 1 , 2 2             
         
         // 0 0  , 0 1 , 0 2
         if(a==0 || b==0 )
@@ -56,5 +62,71 @@ class Solution {
         }
     }
     
+    */
+    if(root==null)
+        return 0;
+           int[] ar =  new int[]{0};
+    int k =  fn(root,ar);
+            
+            if(k==-1)
+                 ar[0]+=1;
+            
+            return ar[0];
+} 
     
+    public int fn(TreeNode root,int[] ans)
+    {
+        if(root==null)
+            return 0;
+        if(root.left==null && root.right==null)
+            return -1;
+        
+        int l = fn(root.left,ans);
+        int r = fn(root.right,ans);
+        
+        int el =  ans[0];
+           
+        if(l==-1 || r==-1)
+        {
+            ans[0]+=1;
+            return 1;
+        }
+        
+        if(l==0 && r==0)
+            return -1;
+        
+        
+            return  0;
+    }
 }
+
+
+
+
+/*
+
+
+
+
+leaf - not install -> -1  ,  0  , 1 
+
+leaf - return -1
+
+l=-1 || r=-1 -> 1 
+
+
+l==0 && r==0 ->  -1
+
+ return 1
+
+0  0
+0  1
+1   1
+
+
+
+
+
+
+
+*/
