@@ -28,24 +28,58 @@ class Solution {
         return sum;
         */
         
-        return summing(root,0);
+       // 2ND APPROACH
+       // return summing(root,0);
+        
+        // 3RD APPROACH
+        return fn(root,"");
     }
     
-    public int summing(TreeNode root,int sum)
+      public int fn(TreeNode root,String str)
     {
         if(root==null)
             return 0;
         
+          int sum=0;
         if(root.left==null && root.right==null)
         {
-            sum = sum*10+root.val;
-            return sum;
+String m = str+Integer.toString(root.val);
+        return Integer.parseInt(m);
         }
+          
         
-        int l = summing(root.left,sum*10+root.val);
-        int r = summing(root.right,sum*10+root.val);
+       int k1 =  fn(root.left,str+Integer.toString(root.val));
+       int k2 = fn(root.right,str+Integer.toString(root.val));
+          
+          return k1+k2;
+    }
+    
+    public int summing(TreeNode root,int sum)
+    {
+//         if(root==null)
+//             return 0;
         
-        return l+r;
+//         if(root.left==null && root.right==null)
+//         {
+//             sum = sum*10+root.val;
+//             return sum;
+//         }
+        
+//         int l = summing(root.left,sum*10+root.val);
+//         int r = summing(root.right,sum*10+root.val);
+        
+//         return l+r;
+        
+        if(root==null)
+            return 0;
+        
+        int nsum = 10*sum+root.val;
+        
+        int l = summing(root.left,nsum);
+        int r = summing(root.right,nsum);
+        
+        return  l + r + nsum;
+  
     }
     
     public void fn(TreeNode root,String str,List<String> list)
@@ -61,3 +95,30 @@ class Solution {
         fn(root.right,str+Integer.toString(root.val),list);
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+ 
+ 
