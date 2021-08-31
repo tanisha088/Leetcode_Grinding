@@ -57,22 +57,38 @@ class Solution {
         */
         
         
+        // IT IS IMPOSSIBLE TO ACHIEVE A VALUE SUM >0 IF WE HAVE ZERO ELEMENTS
+        // AND HENCE RES[I] IF I!=0 INITIALLY IS MAX REPRESENTING -1 -> MEANING 
+        // NOT POSSIBLE TO HAPPEN , BUT IF WE HAVE NO ELEMENTS , WE STILL CAN HAVE 
+        // ZERO SUM ---> USING 0 COINS. SO IT IS POSSIBLE AND AFTER THAT 
+        // EACH TIME WE WILL BE TAKING RES[J] = 1+ RES[J-ARR[I-1]] IF J-ARR[I-1] IS
+        // POSSIBLE TO HAPPEN SINCE , AGAR J-ARR[I-1] ISNN'T POSSIBLE TO HAPPEN
+        // HOW COME ANYTHING ADDED TO IT IS POSSIBLE.
+        
         int[] res =new int[amount+1];
-        res[0]=0;
-        for(int i=1;i<res.length;i++)
-            res[i]=Integer.MAX_VALUE;
+        // res[0]=0;
+//         for(int i=1;i<res.length;i++)
+//             res[i]=Integer.MAX_VALUE;
+        
+        if(amount==0)
+            return 0;
         
         for(int i=1;i<coins.length+1;i++)
         {
+               if(coins[i-1]==amount)
+                    return 1;
            
             for(int j=1;j<amount+1;j++)
             {
-                if(coins[i-1]>j || res[j-coins[i-1]]==Integer.MAX_VALUE)
+                if(coins[i-1]>j || (j!=coins[i-1] && res[j-coins[i-1]]==0))
                     continue;
+                
+             
                 
               //  if(res[i-coins[j]]!=Integer.MAX_VALUE)
               
-                
+                if(res[j]==0)
+                     res[j]=Integer.MAX_VALUE;
                res[j] = Math.min(res[j],res[j-coins[i-1]]+1);
             }
             
@@ -80,7 +96,7 @@ class Solution {
         }
         
         
-        return res[res.length-1]==Integer.MAX_VALUE?-1:res[res.length-1];
+        return res[res.length-1]==0?-1:res[res.length-1];
         
         
         
@@ -98,5 +114,32 @@ class Solution {
     
     
     
+
+
+
+// coins.length * amount 
+
+
+// j >= arr[i-1] 
+
+// mat[i][j] = mat[i-1][j]
+
+// if(mat[i][j]==0 ?  MAX)
+
+// max(mat[i][j]arr[i-1][j-arr[i-1]]+1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     
     
