@@ -1,72 +1,69 @@
 class Solution {
+    
+    int r=0;
+    int steps=0;
+    
     public int orangesRotting(int[][] grid) {
         
-        LinkedList<int[]> list = new LinkedList<int[]>();
-        HashSet<String> set=new HashSet<String>();
-        int  rotten=0;
-        int fresh=0;
+        int[][] dp= new int[grid.length][grid[0].length];
+        
+        for(int i=0;i<grid.length;i++)
+        {
+            Arrays.fill(dp[i],Integer.MAX_VALUE);
+        }
+        
+        HashSet<String> set = new HashSet<String>();
         for(int i=0;i<grid.length;i++)
         {
             for(int j=0;j<grid[0].length;j++)
             {
-                if(grid[i][j]==0)
-                    continue;
-                if(grid[i][j]==2)
+                if(!set.contains(grid[i][j]) && grid[i][j]==2)
                 {
-                    list.add(new int[]{i,j});
-                    set.add(i+" "+j);
-                    rotten++;
-                 }
-                else
-                   fresh++;
-               
-            }
-        }
-        int ans=0;
-   
-          int coo=  rotten+fresh;
-          
-        if(fresh==0)
-            return 0;
-        
-        if(rotten==0)
-            return -1; 
-      
-      
-        while(!list.isEmpty())
-        {
-            int size=list.size();
-            while(size!=0)
-            {
-                size--;
-                
-                int[] arr= list.remove();
-                coo--;
-                int xc=arr[0];
-                int yc= arr[1];
-                
-                int[] x= {-1,0,0,1};
-                int[] y= {0,1,-1,0};
-                
-                for(int i=0;i<4;i++)
-                {
-                    int nx = x[i]+xc;
-                    int ny = y[i]+yc;
-                    
-                    if(nx>=0 && nx<grid.length && ny>=0 && ny<grid[0].length &&!set.contains(nx+" "+ny) && (grid[nx][ny]==1))
-                    {
-                        set.add(nx+" "+ny);
-                        list.add(new int[]{nx,ny});
-                    }
+                    dfs(grid,set,i,j,dp,0);
                 }
             }
-            ans++;
         }
-        if(coo!=0)
-            return -1;
-      return ans-1;
-     
+        int max = Integer.MIN_VALUE;
+        for(int i=0;i<grid.length;i++)
+        {
+            for(int j=0;j<grid[0].length;j++)
+            {
+                if(grid[i][j]==1)
+                    max=Math.max(dp[i][j],max);
+            }
+        }
+        
+        if(max==Integer.MIN_VALUE)
+            return 0;
+        return max==Integer.MAX_VALUE?-1:max;
     }
+    
+    
+    public void dfs(int[][] grid,HashSet<String> set,int i,int j,int[][] dp,int steps)
+    {
+        
+        if(dp[i][j]<=steps)
+            return;
+        
+        dp[i][j] = steps;
+        
+            set.add(i+" "+j);
+            
+        int[] x = {-1,1,0,0};
+        int[] y = {0,0,1,-1};
+        
+        for(int k=0;k<4;k++)
+        {
+            int nx= x[k]+i;
+            int ny= y[k]+j;
+            
+            if(nx>=0 && ny>=0 && nx<grid.length && ny<grid[0].length && grid[nx][ny]==1)
+            {
+                dfs(grid,set,nx,ny,dp,steps+1);
+            }
+        }
+    }
+    
     
     
 }
