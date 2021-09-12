@@ -38,9 +38,49 @@ class Solution {
 //         fn(head.next.next);
 //     }
         
+        // if(head==null || head.next==null)
+        //     return head;
+        // return swap(null,head,head.next);
+        
         if(head==null || head.next==null)
             return head;
-        return swap(null,head,head.next);
+        
+        ListNode p1 = null;
+        ListNode p2 = head;
+        
+        
+        
+        ListNode c1 = p2;
+        ListNode c2 = c1.next;
+        
+        while(p2!=null && p2.next!=null)
+        {
+          
+            c1 = p2;
+           c2 = c1.next;
+         //   if(c1==null || c1.next==null)
+           //     return head;
+           //   System.out.println((c1==null?"-1":c1.val)+"  "+ (c2==null?"-1":c2.val) + " **");
+            p2.next = c2.next;
+            c2.next= c1;
+            if(p1==null)
+            {
+                head=c2;
+               
+            }
+            else
+               { p1.next=c2;}
+          
+       //     System.out.println(c1.val+" "+c2.val+" "+head.val+" "+);
+            p1=c1;
+            p2=p2.next;
+            
+           
+        }
+        
+        return head;
+        
+        
     }
     
     public ListNode swap(ListNode pre,ListNode head,ListNode next)
@@ -59,3 +99,20 @@ class Solution {
         return next;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+// 1->2->3->4 
+    
+    
+// p1 p2    
