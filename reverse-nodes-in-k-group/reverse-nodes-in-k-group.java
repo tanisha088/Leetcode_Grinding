@@ -95,40 +95,83 @@ class Solution {
 //         return head;
         
         
-        ListNode node = head;
-        ListNode ans=null;
-        ListNode prev=null;
-        while(node!=null)
-        {
-            ListNode nnode = node;
-            for(int i=0;i<k-1;i++)
-            {
-                nnode = nnode.next;
-              //  System.out.println(nnode+" "+node);
-                if(nnode==null)
-                   return (ans==null)?head:ans;
-            }
+//         ListNode node = head;
+//         ListNode ans=null;
+//         ListNode prev=null;
+//         while(node!=null)
+//         {
+//             ListNode nnode = node;
+//             for(int i=0;i<k-1;i++)
+//             {
+//                 nnode = nnode.next;
+//               //  System.out.println(nnode+" "+node);
+//                 if(nnode==null)
+//                    return (ans==null)?head:ans;
+//             }
             
-            ListNode next =  nnode.next;
-            nnode.next= null;
+//             ListNode next =  nnode.next;
+//             nnode.next= null;
             
-            ListNode last =  reverse(node);
-       //     System.out.println(ans+" "+last);
-            if(ans==null)
-                ans = last;
-            else
-                prev.next=last;
-            node.next = next;
-            prev=node;
-            node = node.next;
-        }
+//             ListNode last =  reverse(node);
+       
+//             if(ans==null)
+//                 ans = last;
+//             else
+//                 prev.next=last;
+//             node.next = next;
+//             prev=node;
+//             node = node.next;
+//         }
         
 
-        if(ans==null)ans = head;
+//         if(ans==null)ans = head;
         
-        return ans;
+//         return ans;
         
         
+    ListNode dummy =  new ListNode(-1,head);
+        ListNode prev = dummy;
+        ListNode curr = dummy.next;
+        if(curr.next==null)
+            return dummy.next;
+        ListNode then =  curr.next;
+        
+        int size = 0;
+        
+        ListNode k1 =  dummy.next;
+        while(k1!=null)
+        {
+            size++;
+            k1=k1.next;
+        }
+        
+        while(true)
+        {
+            int count=k-1;
+            size-=k;
+            if(size<0)
+                return dummy.next; 
+ //  System.out.println(prev.val+" "+curr.val+" "+then.val);
+      while(count!=0)
+      {
+      //     ListNode pnext= prev.next;
+      //     prev.next = then;
+      //     curr.next = then.next;
+      //     then.next = pnext;
+      //     then = curr.next;
+         
+          curr.next = then.next;
+          then.next = prev.next;
+          prev.next = then;
+          then = curr.next;
+          count--;
+      }
+            prev = curr;
+            curr = then;
+             if(curr==null || curr.next==null)
+            return dummy.next;
+            then = curr.next;
+        }
         
     }
     
