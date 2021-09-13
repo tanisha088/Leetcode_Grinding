@@ -1,67 +1,109 @@
 class Solution {
     public int largestRectangleArea(int[] heights) {
 
-        int[] sol = new int[heights.length];
-        int[] sor = new int[heights.length];
+//         int[] sol = new int[heights.length];
+//         int[] sor = new int[heights.length];
+        
+//         Stack<Integer> st = new Stack<Integer>();
+//         for(int i=0;i<heights.length;i++)
+//         {
+//             while(!st.isEmpty() && heights[st.peek()]>=heights[i])
+//                 st.pop();
+            
+//             if(st.isEmpty())
+//                 sol[i]=-1;
+//             else
+//                 sol[i]=st.peek();
+            
+//             st.push(i);
+//         }
+        
+//         st = new Stack<Integer>();
+//         for(int i=heights.length-1;i>=0;i--)
+//         {
+//             while(!st.isEmpty() && heights[st.peek()]>=heights[i])
+//                 st.pop();
+            
+//             if(st.isEmpty())
+//                 sor[i]=-1;
+//             else
+//                 sor[i]=st.peek();
+            
+//             st.push(i);
+//         }
+         
+//   //   -1 -1
+        
+        
+//         int ans=0;
+        
+//         /*
+//         for(int i=0;i<heights.length;i++)
+//         {
+//             int val=0;
+            
+//             // ALL THESE CONDITIONS CAN BE REDUCED TO JUST ---->
+            
+//             // (SOR[I]-SOL[I]-1)*(HEIGHTS[I]) IF WE PUT SOR[I]=HEIGHTS.LENGTH WHEN IT IS -1 AND SOL[I]=-1 WHEN IT IS -1
+//             /*
+//             if(sol[i]==-1 && sor[i]==-1)
+//                 val=heights.length*heights[i];
+//             else if(sol[i]==-1)
+//                 val=sor[i]*heights[i];
+//             else if(sor[i]==-1)
+//                 val=(heights.length-1-sol[i])*heights[i];
+//             else 
+//                 val=(sor[i]-sol[i]-1)*(heights[i]);
+            
+            
+//             ans = Math.max(val,ans);
+//         //    System.out.println(sol[i]+" "+sor[i]);
+//         }
+//         */
+        
+//         for(int i=0;i<sor.length;i++)
+//             sor[i]= (sor[i]==-1)?heights.length:sor[i];
+        
+//         for(int i=0;i<sol.length;i++)
+//             ans=Math.max(ans,(sor[i]-sol[i]-1)*(heights[i]));
+        
+//         return ans;
+        
         
         Stack<Integer> st = new Stack<Integer>();
-        for(int i=0;i<heights.length;i++)
-        {
-            while(!st.isEmpty() && heights[st.peek()]>=heights[i])
-                st.pop();
-            
-            if(st.isEmpty())
-                sol[i]=-1;
-            else
-                sol[i]=st.peek();
-            
-            st.push(i);
-        }
-        
-        
-     
-        
-        st = new Stack<Integer>();
-        for(int i=heights.length-1;i>=0;i--)
-        {
-            while(!st.isEmpty() && heights[st.peek()]>=heights[i])
-                st.pop();
-            
-            if(st.isEmpty())
-                sor[i]=-1;
-            else
-                sor[i]=st.peek();
-            
-            st.push(i);
-        }
-         
-        //   -1 -1
-        
-        
         int ans=0;
         
+        /*
+        >=
+        pop -     jo nikal rha hai -  jo neeche hai -1
+        if neeche nothing  ->  jo neeche hai = -1
+        if upar nothing  ->   arr.length
+        */
+        
+        
         for(int i=0;i<heights.length;i++)
         {
-            int val=0;
-            if(sol[i]==-1 && sor[i]==-1)
-                val=heights.length*heights[i];
-            else if(sol[i]==-1)
-                val=sor[i]*heights[i];
-            else if(sor[i]==-1)
-                val=(heights.length-1-sol[i])*heights[i];
-            else 
-                val=(sor[i]-sol[i]-1)*(heights[i]);
+            while(!st.isEmpty() && heights[st.peek()]>=heights[i])
+            {
+                int m =  st.pop();
+                int low =  (st.isEmpty())?-1:st.peek();
+                int high =  i;
                 
+                ans= Math.max(ans,(high-low-1)*heights[m]);
+            }
             
-            ans = Math.max(val,ans);
-        //    System.out.println(sol[i]+" "+sor[i]);
+            st.push(i);
         }
         
-           // sol ->  -1 -1  1 2 1 4
-        // sor ->     1 -1 4 4 -1 -1
-        //     10 
+        while(!st.isEmpty())
+        {
+                int m =  st.pop();
+                int low =  (st.isEmpty())?-1:st.peek();
+                int high = heights.length;
+                
+                ans= Math.max(ans,(high-low-1)*heights[m]);
+        }
         
-       
         return ans;
         
     }
