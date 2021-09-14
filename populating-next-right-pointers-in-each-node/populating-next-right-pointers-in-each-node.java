@@ -94,6 +94,8 @@ class Solution {
 //         return root;
 //         */
         
+        
+        /*
         if(root==null)
             return null;
         
@@ -112,5 +114,75 @@ class Solution {
         connect(root.right);
         
         return root;
+        */
+        
+//         if(root==null)
+//             return null;
+        
+//                 Node  node = root;
+//         Node k = node;
+//         while(k.left!=null)
+//         {
+//             node = k;
+//             while(node!=null)
+//             {
+//                 if(node.left!=null)
+//                 node.left.next = node.right;
+//                 if(node.left!=null && node.next!=null)
+//                     node.right.next=node.next.left;
+                
+//                 node=node.next;
+//             }
+            
+//             k=k.left;
+//         }
+        
+//         return root;
+        
+        
+        fn(root);
+        
+        return root;
+        
     }
+        
+        public void fn(Node root)
+        {
+        
+        if(root==null || (root.left==null && root.right==null))
+            return;
+        
+        
+        root.left.next=  root.right;
+        
+        if(root.next!=null)
+        root.right.next = root.next.left;
+        
+        fn(root.left);
+        fn(root.right);
+            
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
 }
