@@ -22,47 +22,14 @@ class Solution {
 // NOW AB HUM AGAR KISI NODE PE HAI -> TO HUM DEKHENGE KI AGAR USKA LEFT EXIST KARTA HAI YA NHI -> AGAR NHI TO PRINT NODE AND GO TO RIGHT -> (RIGHT NULL HAI YA NHI YE CHECK KARNE KA MATLAB NHI -> ABHI AAGE SMJH AAYEGA ) -> ELSE IF LEFT IS NOT NULL -> GO TO LEFT AND THEN TO RIGHTMOST NODE -> IF RIGHTMOST NODE.RIGHT = NULL -> SET IT TO NODE AND YE INDICATION HAI KI YE PHLI BAAR TRAVERSE HO RHI ... SO NODE =  NODE.LEFT BHEJ DO KYONKI NEECHE WALI TRAVERSE NHI HUI ABHI TAK--- AND AB IS NODE KE LIYE NEECHE KA SCENE SMBHALE -> ELSE AGAR IS NODE.RIGHT!=NULL AND ==UPAR WALI PARENT NODE THEN YE PART PHLE HI TRAVERSE HO GAYA HAI AUR BAAD MEI WAAPAS AAYA HAI AND HENCE IS PARENT KO PRINT KARO AND RIGHT MEI TRAVERSAL KARO ( RIGHT!=NULL CHECK ISLIYE NHI KARNA KYONKI PHLE HI EK BAAR HAR PARENT APNE CHILD KA RIGHT SET KAR JAAYEGA AND HENCE USKE BAAD RIGHT KE THROUGH HI HUM NODE PE WAAPAS JAAYENGE)
         
        
-        LinkedList<Integer> ll = new LinkedList<Integer>();
-         
-        while(root!=null)
-        {
-            if(root.left==null)
-            {
-               ll.add(root.val);
-                root=root.right;
-            }
-            else
-            {
-                TreeNode node =  root.left;
-                while(node.right!=null && node.right!=root)
-                  node=node.right;
-                
-                if(node.right==null)
-                {
-                    node.right =root;
-                    root = root.left;
-                }
-                else
-                {
-                    ll.add(root.val);
-                    node.right=null;
-                    root = root.right;
-                }
-            }
-        }
-        
-        /*        
-        // 2ND APPROACH USING STACK ::::::::
-        
-             Stack<TreeNode> st= new Stack<TreeNode>();
-        
-        st.push(root);
-
+         LinkedList<Integer> ll = new LinkedList<Integer>();
+      
+  Stack<TreeNode> st = new Stack();
         if(root==null)
             return ll;
         
-        TreeNode curr =root.left;
-        while(!st.isEmpty())
+        TreeNode curr =root;
+        while(!st.isEmpty() || curr!=null)
         {
             while(curr!=null)
             {
@@ -71,9 +38,43 @@ class Solution {
             }
             TreeNode n = st.pop();
             ll.add(n.val);
+            System.out.println(ll+" "+st);
             curr = n.right;
            
         }
+//         while(root!=null)
+//         {
+//             if(root.left==null)
+//             {
+//                ll.add(root.val);
+//                 root=root.right;
+//             }
+//             else
+//             {
+//                 TreeNode node =  root.left;
+//                 while(node.right!=null && node.right!=root)
+//                   node=node.right;
+                
+//                 if(node.right==null)
+//                 {
+//                     node.right =root;
+//                     root = root.left;
+//                 }
+//                 else
+//                 {
+//                     ll.add(root.val);
+//                     node.right=null;
+//                     root = root.right;
+//                 }
+//             }
+//         }
+        
+        /*        
+        // 2ND APPROACH USING STACK ::::::::
+        
+             Stack<TreeNode> st= new Stack<TreeNode>();
+        
+       
          */
         return ll;
         
