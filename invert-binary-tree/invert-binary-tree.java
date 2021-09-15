@@ -20,11 +20,12 @@ class Solution {
         if(root==null)
             return root;
         
-        TreeNode m = invertTree(root.left);
-        TreeNode m1 = invertTree(root.right);
+      TreeNode k =  root.left;
+        root.left = root.right;
+        root.right = k;
         
-        root.left = m1;
-        root.right = m;
+        invertTree(root.left);
+        invertTree(root.right);
         
         return root;
     }
