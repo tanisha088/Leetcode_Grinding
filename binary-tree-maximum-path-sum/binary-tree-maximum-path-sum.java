@@ -29,14 +29,14 @@ class Solution {
         
         // lsum+node , rsum+node , just node
         
-        int sum1 = maxsum(root.left,ans);
-        int sum2 = maxsum(root.right,ans);
+        int sum1 = Math.max(maxsum(root.left,ans),0);
+        int sum2 = Math.max(maxsum(root.right,ans),0);
         
-        int max = Math.max(sum1+root.val,Math.max(sum2+root.val,root.val));
         
-        ans[0]=Math.max(root.val+sum1+sum2,Math.max(ans[0],max));
+        ans[0] = Math.max(sum1+root.val+sum2,ans[0]);
         
-        return max;
+      
+        return Math.max(sum1,sum2)+root.val;
     }
         
         /*
@@ -119,3 +119,5 @@ class Solution {
     
    */
 }
+
+
