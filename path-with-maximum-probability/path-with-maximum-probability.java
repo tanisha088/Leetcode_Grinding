@@ -57,12 +57,13 @@ class Solution {
         
        pq.add(new Pair(start,1.0));
         boolean[] visited= new boolean[n];
+        double ans=0;
         while(!pq.isEmpty())
         {
             Pair p1= pq.remove();
             visited[p1.a]=true;
             if(p1.a==end)
-                return p1.b;
+                ans=Math.max(ans,p1.b);
             ArrayList<Pair> list= graph.get(p1.a);
             for(int i=0;i<list.size();i++)
             {
@@ -77,6 +78,6 @@ class Solution {
             }
         }
         
-        return 0;
+        return ans;
     }
 }
