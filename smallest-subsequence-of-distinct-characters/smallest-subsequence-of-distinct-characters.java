@@ -55,42 +55,76 @@ class Solution {
         
         */
         
-        Stack<Character> st = new Stack<Character>();
-        HashSet<Character> set = new HashSet<Character>();
-        HashMap<Character,Integer> h = new HashMap();
+//         Stack<Character> st = new Stack<Character>();
+//         HashSet<Character> set = new HashSet<Character>();
+//         HashMap<Character,Integer> h = new HashMap();
         
-        for(char c:s.toCharArray())
+//         for(char c:s.toCharArray())
+//         {
+//             h.put(c,h.getOrDefault(c,0)+1);
+//         }
+        
+//         for(char c:s.toCharArray())
+//         {
+           
+//        while(!st.isEmpty() && st.peek()-'a'>c-'a' && h.get(st.peek())>0 && !set.contains(c))
+//                 {
+//                     char m = st.pop();
+//                     set.remove(m);
+//                 }
+           
+//             if(!set.contains(c))
+//             st.push(c);
+//             set.add(c);
+//             h.put(c,h.getOrDefault(c,0)-1);
+            
+//         }
+        
+//         String str = "";
+        
+//         while(!st.isEmpty())
+//             str = st.pop()+ str;
+        
+//         return str;
+        
+        
+     HashMap<Character,Integer> h=  new HashMap();
+        HashSet<Character>set = new HashSet();
+        
+        Stack<Character> st=  new Stack<Character>();
+        
+        for(int i=0;i<s.length();i++)
         {
-            h.put(c,h.getOrDefault(c,0)+1);
+            h.put(s.charAt(i),i);
         }
         
-        for(char c:s.toCharArray())
+        for(int i=0;i<s.length();i++)
         {
-           
-       while(!st.isEmpty() && st.peek()-'a'>c-'a' && h.get(st.peek())>0 && !set.contains(c))
-                {
-                    char m = st.pop();
-                    set.remove(m);
-                }
-           
-            if(!set.contains(c))
-            st.push(c);
-            set.add(c);
-            h.put(c,h.getOrDefault(c,0)-1);
+            if(set.contains(s.charAt(i)))
+                continue;
+        
+            while(!st.isEmpty() && st.peek()>s.charAt(i) && h.get(st.peek())>i)
+            {
+                set.remove(st.pop());
+            }
+            
+             set.add(s.charAt(i));
+                st.push(s.charAt(i));
             
         }
         
-        String str = "";
+         String str = "";
         
         while(!st.isEmpty())
             str = st.pop()+ str;
         
         return str;
-    }
 }
 
-//aabbccaacabc
+//aabbccaacabc 
 
+
+}
 
 /*************************************************************************************/
 
