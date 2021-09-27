@@ -65,38 +65,38 @@ class Solution {
         // POSSIBLE TO HAPPEN SINCE , AGAR J-ARR[I-1] ISNN'T POSSIBLE TO HAPPEN
         // HOW COME ANYTHING ADDED TO IT IS POSSIBLE.
         
-        int[] res =new int[amount+1];
-        // res[0]=0;
-//         for(int i=1;i<res.length;i++)
-//             res[i]=Integer.MAX_VALUE;
+//         int[] res =new int[amount+1];
+//         // res[0]=0;
+// //         for(int i=1;i<res.length;i++)
+// //             res[i]=Integer.MAX_VALUE;
         
-        if(amount==0)
-            return 0;
+//         if(amount==0)
+//             return 0;
         
-        for(int i=1;i<coins.length+1;i++)
-        {
-               if(coins[i-1]==amount)
-                    return 1;
+//         for(int i=1;i<coins.length+1;i++)
+//         {
+//                if(coins[i-1]==amount)
+//                     return 1;
            
-            for(int j=1;j<amount+1;j++)
-            {
-                if(coins[i-1]>j || (j!=coins[i-1] && res[j-coins[i-1]]==0))
-                    continue;
+//             for(int j=1;j<amount+1;j++)
+//             {
+//                 if(coins[i-1]>j || (j!=coins[i-1] && res[j-coins[i-1]]==0))
+//                     continue;
                 
              
                 
-              //  if(res[i-coins[j]]!=Integer.MAX_VALUE)
+//               //  if(res[i-coins[j]]!=Integer.MAX_VALUE)
               
-                if(res[j]==0)
-                     res[j]=Integer.MAX_VALUE;
-               res[j] = Math.min(res[j],res[j-coins[i-1]]+1);
-            }
+//                 if(res[j]==0)
+//                      res[j]=Integer.MAX_VALUE;
+//                res[j] = Math.min(res[j],res[j-coins[i-1]]+1);
+//             }
             
-       //     res[i]=max;
-        }
+//        //     res[i]=max;
+//         }
         
         
-        return res[res.length-1]==0?-1:res[res.length-1];
+//         return res[res.length-1]==0?-1:res[res.length-1];
         
         
         
@@ -107,6 +107,37 @@ class Solution {
         1,2,5
         
         */
+        
+           int[] arr = new int[amount+1];
+        Arrays.fill(arr,Integer.MAX_VALUE);
+        arr[0]=0;
+        // if(amount==0)
+        //     return 0;
+        for(int i=0;i<coins.length;i++)
+        {
+            for(int j=1;j<=amount;j++)
+            {
+//                 if(j==coins[i])
+//                 {
+//                     arr[j]=1;
+//                     continue;
+//                 }
+                
+                 if(j>=coins[i])
+                 {
+                     if(arr[j-coins[i]]==Integer.MAX_VALUE)
+                          continue;
+                     arr[j]=Math.min(arr[j],arr[j-coins[i]]+1);
+                 }
+          
+            }
+            
+       //     for(int j=0;j<=amount;j++)
+         //       System.out.print(arr[j]+"   ");
+     //       System.out.println();
+        }
+        
+        return arr[arr.length-1]==Integer.MAX_VALUE?-1:arr[arr.length-1];
        
     }
         
@@ -127,6 +158,7 @@ class Solution {
 // if(mat[i][j]==0 ?  MAX)
 
 // max(mat[i][j]arr[i-1][j-arr[i-1]]+1
+
 
 
 
