@@ -1,32 +1,42 @@
 class Solution {
     public int longestMountain(int[] arr) {
-        
-        int i=0;
-        int res=0;
-        while(i<arr.length)
+      
+        int st=0;
+        int ans=0;
+        while(st<arr.length)
         {
-            int st =i;
-            int s1 =i;
-            while(i<arr.length-1 && arr[i+1]>arr[i])
-                i++;
-            
-            if(i-st<1)
+            int val = arr[st];
+            st++;
+            int c=1;
+            int mount=0;
+            while(st<arr.length && arr[st]>val)
             {
-                i++;
-                continue;
+                c++;
+                mount=st;
+                val = arr[st];
+                st++;
             }
             
-            st = i;
-            System.out.println(st);
-            while(i<arr.length-1 && arr[i]>arr[i+1])
-                i++;
-            
-            if(i-st<1)
+            if(c==1)
                 continue;
-            System.out.println(i+" "+s1);
-            res=Math.max(res,i-s1+1);
+            
+            
+            int c2=0;
+            
+            while(st<arr.length && arr[st]<arr[mount])
+            {
+                c2++;
+                mount = st;
+                st++;
+            }
+            
+            if(c2==0)
+                continue;
+            
+            st--;
+            ans= Math.max(ans,c+c2);
         }
         
-        return res;
+        return ans;
     }
 }
