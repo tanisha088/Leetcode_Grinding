@@ -32,17 +32,37 @@ class Solution {
         {
             for(int j=1;j<=n2;j++)
             {
-                if(str1.charAt(i-1)==str2.charAt(j-1))
+               // if(str1.charAt(i-1)==str2.charAt(j-1))
                     dp[i][j]= dp[i-1][j-1] ;
-                else
+                if(str1.charAt(i-1)!=str2.charAt(j-1))
                 {
-                    dp[i][j] = Math.min(dp[i-1][j]+(int)str1.charAt(i-1),dp[i][j-1]+(int)str2.charAt(j-1));
+                    dp[i][j] = Math.min((int)str1.charAt(i-1)+(int)str2.charAt(j-1)+dp[i-1][j-1],Math.min(dp[i-1][j]+(int)str1.charAt(i-1),dp[i][j-1]+(int)str2.charAt(j-1))); 
+               
                 }
             }
         }
+        
+     
         
         
         return dp[str1.length()][str2.length()];
         
     }
 }
+
+
+
+
+
+
+/*
+
+
+sea -  eat
+
+-  e a t
+s  0 
+e  1 1 1
+a  0 2 0
+
+*/
