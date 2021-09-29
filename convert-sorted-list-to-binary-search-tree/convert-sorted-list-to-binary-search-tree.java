@@ -24,86 +24,69 @@
  * }
  */
 class Solution {
-    ListNode gh= null;
     public TreeNode sortedListToBST(ListNode head) {
         
-        /*
+       
         int size=0;
-        ListNode h = head;
-        while(h!=null)
+        ListNode dum =  head;
+        while(dum!=null)
         {
+            dum= dum.next;
             size++;
-            h=h.next;
         }
-        gh = head;
-        return stobst(size);
-        */
         
-        // INCASE YOU DON'T WANT TO KEEP A GLOBAL HEAD ---->
-    //      if(head==null) return null;
-    // return toBST(head,null);
-        
-        if(head==null)
-            return null;
-        
-        if(head.next==null)
-	return new TreeNode(head.val);
-
-	
-	ListNode prev=null;
-
-	ListNode slow=head;
-	ListNode fast=head;
-
-	while(fast!=null && fast.next!=null)
-	{
-	prev=slow;
-	slow=slow.next;
-	fast=fast.next.next;
-	}
-
-    TreeNode node = new TreeNode(slow.val);
-
-prev.next= null;
-ListNode next = slow.next;
-slow.next= null;
-    //    System.out.println(node.val);
-    node.left = sortedListToBST(head);
-    node.right = sortedListToBST(next);
-
-return node;
-        
+        return fn(head,size);
     }
     
-   
-     
-public TreeNode toBST(ListNode head, ListNode tail){
-    ListNode slow = head;
-    ListNode fast = head;
-    if(head==tail) return null;
-    
-    while(fast!=tail&&fast.next!=tail){
-        fast = fast.next.next;
-        slow = slow.next;
-    }
-    TreeNode thead = new TreeNode(slow.val);
-    thead.left = toBST(head,slow);
-    thead.right = toBST(slow.next,tail);
-    return thead;
-}
-    public TreeNode stobst(int size)
+    public TreeNode fn(ListNode head,int size)
     {
-        if(size==0)
+        if(head==null || size==0)
             return null;
         
-        TreeNode l = stobst(size/2);
-        TreeNode root = new TreeNode(gh.val);
-        gh=gh.next;
-        TreeNode r = stobst(size-size/2-1);
+        if(size==1)
+            return new TreeNode(head.val);
         
-        root.left = l;
-        root.right = r;
+        ListNode slow= head;
+        ListNode fast=head;
+        ListNode prev=null;
+        while(fast!=null && fast.next!=null)
+        {
+            prev=slow;
+            slow = slow.next;
+            fast=fast.next.next;
+        }
+        
+        TreeNode root = new TreeNode(slow.val);
+        int rsize=0;
+      
+        ListNode rside =  slow;
+        while(rside.next!=null)
+        {
+            rside =rside.next;
+            rsize++;
+        }
+        
+         rside =  slow.next;
+        slow.next=null;
+        prev.next=null;
+  //      System.out.println(head.val+" "+rsize+" "+root.val);
+        
+    root.left =  fn(head,size-rsize-1);
+        root.right = fn(rside,rsize);
         
         return root;
     }
 }
+
+
+
+// -10,-3,0,5,9
+    
+    
+//     5
+    
+//     2
+    
+//          5
+    
+    
