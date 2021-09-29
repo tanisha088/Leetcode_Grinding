@@ -1,33 +1,47 @@
 class Solution {
+    
+    
+    
     public List<List<Integer>> subsets(int[] nums) {
-        
-    //    List<List<Integer>> arr =  ArrayList<ArrayList<Integer>>();
-        
-    //    fn(nums,arr,new List<Integer>(),new HashSet<List<Integer>>(),0);
-        
-        ArrayList<List<Integer>> lists =  new ArrayList<List<Integer>>();
-        
-         fn(nums,lists,new ArrayList<Integer>(),new HashSet<List<Integer>>(),0);
-        lists.add(new ArrayList<Integer>());
-        return lists;
+     
+       return fn(nums,0);
     }
     
-    public void fn(int[] num,List<List<Integer>> list,List<Integer> res , HashSet<List<Integer>> set,int i)
+    public List<List<Integer>> fn(int[] nums,int i)
     {
-          if(res.size()>0 && !set.contains(res))
-            {
-                list.add(new ArrayList<Integer>(res));
-            }
-      
-        
-        for(int j=i;j<num.length;j++)
+          List<List<Integer>> list=  new ArrayList();
+        if(i>nums.length-1)
         {
-            res.add(num[j]);
+            List<Integer> l1 =  new ArrayList();
+            list.add(l1);
+            return list;
+        }
+        
+            List<List<Integer>> ll = fn(nums,i+1);
+             
+        for(int j=0;j<ll.size();j++)
+        {
+            List<Integer> l2  = ll.get(j);
+    
+            List<Integer> cl2 =  new ArrayList<Integer>(l2);
             
-            fn(num,list,res,set,j+1);
+           // System.out.println(cl2+" "+l2+ "##");
             
-            res.remove(res.size()-1);
+            cl2.add(nums[i]);
             
-         }
-     }
-}
+         //   System.out.println(cl2+ " "+l2 +"****");
+            
+            list.add(cl2);
+            list.add(l2);
+        }
+        
+        return list;
+        }
+    }
+
+
+// 3,""
+    
+// 3 , 23 , "" ,2
+
+// 1,3  123  1  12   
