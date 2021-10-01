@@ -1,55 +1,69 @@
 class Solution {
     public int removeStones(int[][] stones) {
-        
-        HashMap<Integer,Integer> parent = new HashMap<Integer,Integer>();
-        int grp=0;
+     
         int max=0;
-        for(int i=0;i<stones.length;i++)
-            max=Math.max(stones[i][0],max);
-        max+=1;
+        int ans=0;
+        
         for(int i=0;i<stones.length;i++)
         {
-            int a=stones[i][0];
-            int x=stones[i][1];
-            int b = max +  x;
-            
-            if(!parent.containsKey(a) && !parent.containsKey(b))
-            {
-                parent.put(a,a);
-                parent.put(b,a);
-                grp+=1;
-            }
-            else if(!parent.containsKey(a))
-            {
-                parent.put(a,find(b,parent));
-            }
-            else if(!parent.containsKey(b))
-            {
-                parent.put(b,find(a,parent));
-            }
-            else
-            {
-                if(find(a,parent)!=find(b,parent))
-                {
-                    grp-=1;
-                    int j1 = find(b,parent);
-                    parent.put(find(a,parent),j1);
-                }
-            }
+            max=Math.max(stones[i][0],max);
         }
         
-    System.out.println(parent);
+        max+=1;
+        int st=max;
+        for(int i=0;i<stones.length;i++)
+        {
+            max =Math.max(max, stones[i][1] + st);
+        }
         
-        return stones.length-grp;
+        int[] parent=  new int[max+1];
+        
+        for(int i=0;i<parent.length;i++)
+            parent[i]=i;
+        
+        int[] size= new int[parent.length];
+        
+      
+        
+        for(int i=0;i<stones.length;i++)
+        {
+            int a = stones[i][0];
+            int b = st + stones[i][1];
+            
+            int pa = find(parent,a);
+            int pb = find(parent,b);
+            
+            
+            if(pa==pb)
+            {
+                size[pb]+=1;
+                continue;
+            }
+            
+            parent[pa] = pb;
+            size[pb]+=(size[pa]+1);
+            
+        }
+        
+        for(int i=0;i<size.length;i++)
+        {
+     //       System.out.println(size[i]+" "+parent[i]);
+            if(size[i]>0 && parent[i]==i)
+                ans = ans + size[i]-1;
+            
+        }
+        
+        return ans;
     }
     
-    public int find(int a,HashMap<Integer,Integer> par)
+    public int find(int[] parent,int a)
     {
-        if(par.get(a)==a)
+        if(parent[a]==a)
             return a;
         
-        int k = find(par.get(a),par);
-        par.put(a,k);
-        return k;
+        return find(parent,parent[a]);
     }
 }
+
+
+
