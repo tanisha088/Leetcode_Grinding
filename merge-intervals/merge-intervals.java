@@ -1,47 +1,53 @@
 class Solution {
+    
+    public class Compinter implements Comparator<int[]>
+    {
+        public int compare(int[] a,int[] b)
+        {
+            if(b[0]-a[0]<0)
+            {
+                return 1;
+            }
+            else if(b[0]-a[0]>0)
+           return -1;
+            else
+                return 0;
+        }
+    }
+    
     public int[][] merge(int[][] intervals) {
         
-        PriorityQueue<int[]> pq = new PriorityQueue<int[]>((a,b)->(a[0]==b[0]?a[1]-b[1]:a[0]-b[0]));
         
+        Arrays.sort(intervals,new Compinter());
+        int st= intervals[0][0];
+        int end = intervals[0][1];
         
-        for(int i=0;i<intervals.length;i++)
-            pq.add(intervals[i]);
-        
-        List<List<Integer>> l = new ArrayList<List<Integer>>();
-        
-        while(pq.size()>1)
+        List<int[]> list=  new ArrayList();
+        for(int i=1;i<intervals.length;i++)
         {
-            int[] in = pq.poll();
-            int[] sec =  pq.poll();
-            
-            if(in[1]<sec[0])
+         //    System.out.println(list+" "+st);
+            if(intervals[i][0]>end)
             {
-                List<Integer> l2  = new ArrayList<Integer>();
-                l2.add(in[0]);
-                l2.add(in[1]);
-                l.add(l2);
-                
-                pq.add(sec);
+               
+                list.add(new int[]{st,end});
+                st=intervals[i][0];
+                end = intervals[i][1];
             }
-            else
-            {
-               pq.add(new int[]{in[0],Math.max(in[1],sec[1])});
-            }
+           else
+           {
+               end = Math.max(end,intervals[i][1]);
+           }
         }
         
-         List<Integer> list  = new ArrayList<Integer>();
-                list.add(pq.peek()[0]);
-                list.add(pq.peek()[1]);
-                l.add(list);
+        list.add(new int[]{st,end});
         
-        int[][] result = new int[l.size()][2];
+        int[][] ans = new int[list.size()][2];
         
-        for(int i=0;i<result.length;i++)
-        {
-            result[i][0] = l.get(i).get(0);
-            result[i][1] = l.get(i).get(1);
-        }
+        for(int i=0;i<list.size();i++)
+            ans[i] = list.get(i);
         
-        return result;
+        
+        return ans;
+        
     }
 }
