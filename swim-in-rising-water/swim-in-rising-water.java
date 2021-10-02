@@ -1,7 +1,7 @@
 class Solution {
     public int swimInWater(int[][] grid) {
         
-        PriorityQueue<int[]> pq= new PriorityQueue<int[]>((a,b)->(a[2]-b[2]));
+       PriorityQueue<int[]> pq= new PriorityQueue<int[]>((a,b)->(a[2]-b[2]));
         boolean[][] visited= new boolean[grid.length][grid.length];
         pq.add(new int[]{0,0,grid[0][0]});
         while(true)
@@ -20,12 +20,11 @@ class Solution {
                 int ny= y[i]+arr[1];
                 if(nx>=0 && nx<grid.length && ny>=0 && ny<grid.length && !visited[nx][ny])
                 {
-                    pq.add(new int[]{nx,ny,Math.max(arr[2],grid[nx][ny])});
+                    pq.add(new int[]{nx,ny,Math.max(arr[2],Math.max(grid[nx][ny],grid[arr[0]][arr[1]]))});
                                     
                  }
             
             }
         }
-        
     }
 }
