@@ -15,68 +15,33 @@
  */
 class BSTIterator {
 
-    TreeNode rootnode = null;
-    TreeNode innode= null;
-    
+    TreeNode curr;
+    TreeNode ans;
+    Stack<TreeNode> st;
     public BSTIterator(TreeNode root) {
-        
-        rootnode = root;
+        curr = root;
+        ans= null;
+        st = new Stack();
     }
     
     public int next() {
-        
-        TreeNode r1 =  rootnode;
-        
-        if(innode==null)
+     
+        while(curr!=null)
         {
-            while(r1.left!=null)
-                r1=r1.left;
-        
-            innode = r1;
-        return r1.val;
-        }
-        int val = innode.val;
-        TreeNode node = null;
-        while(r1!=null)
-        {
-            if(r1.val > val)
-            {
-                node = r1;
-                r1=r1.left;
-            }
-            else
-                r1=r1.right;
+            st.push(curr);
+            curr=curr.left;
         }
         
-        innode =  node;
-        return node.val;
+        ans=  st.pop();
+         curr = ans.right;
+        return ans.val;
+       
+        
     }
     
     public boolean hasNext() {
         
-      TreeNode r1 =  rootnode;
-
-        if(innode==null)
-        {
-            return rootnode!=null;
-        }
-        
-        int val = innode.val;
-        TreeNode node = null;
-        while(r1!=null)
-        {
-            if(r1.val > val)
-            {
-                node = r1;
-                r1=r1.left;
-            }
-            else
-                r1=r1.right;
-        }
-        
-        
-        return node!=null;
-        
+        return !(curr==null &&  st.isEmpty());
     }
 }
 
