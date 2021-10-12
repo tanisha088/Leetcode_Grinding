@@ -1,56 +1,27 @@
 class Solution {
     public int nthUglyNumber(int n) {
-        
-        int a=2;
-            int b=3;
-            int c=5;
-          int t0=1;
-        int t1=1;
-        int t2=1;
-        
     
+        int[] arr=  new int[n];
+        arr[0]=1;   
         
-        int[] arr= new int[n+1];
-        
-        arr[1]=1;
-        
-        
-        
-        for(int i=2;i<=n;i++)
+        int[] pointer =  new int[3];
+        int i=1;
+        while(i<n)
         {
-            int m = Math.min(arr[t0]*a ,Math.min(arr[t1]*b,arr[t2]*c));
-            if(m==arr[t0]*a && m==arr[t1]*b && m==arr[t2]*c)
-            {
-                t0++;
-                t1++;
-                t2++;
-            }
-            else if(m==arr[t0]*a && m==arr[t1]*b)
-            {
-                t0++;
-                t1++;
-            }
-            else if(m==arr[t0]*a && m==arr[t2]*c)
-            {
-                t0++;
-                t2++;
-            }
-            else if(m==arr[t2]*c && m==arr[t1]*b)
-            {
-                t2++;
-                t1++;
-            }
-            else if(m==arr[t0]*a)
-                t0++;
-            else if(m==arr[t1]*b)
-                t1++;
-            else if(m==arr[t2]*c)
-                t2++;
+            int min=Math.min(arr[pointer[0]]*2,Math.min(arr[pointer[1]]*3,arr[pointer[2]]*5));
             
-            arr[i]=m; 
+            if(arr[pointer[0]]*2==min)
+                pointer[0]++;
+            
+            if(arr[pointer[1]]*3==min)
+                pointer[1]++;
+            
+            if(arr[pointer[2]]*5==min)
+                pointer[2]++;
+            
+            arr[i++]=min;
         }
-        for(int j=0;j<arr.length;j++)
-            System.out.println(arr[j]);
-        return arr[n];
+        
+        return arr[arr.length-1];
     }
 }
