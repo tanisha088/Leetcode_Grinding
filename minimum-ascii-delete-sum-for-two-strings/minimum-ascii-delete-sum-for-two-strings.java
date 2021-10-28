@@ -36,7 +36,9 @@ class Solution {
                     dp[i][j]= dp[i-1][j-1] ;
                 if(str1.charAt(i-1)!=str2.charAt(j-1))
                 {
-                    dp[i][j] = Math.min((int)str1.charAt(i-1)+(int)str2.charAt(j-1)+dp[i-1][j-1],Math.min(dp[i-1][j]+(int)str1.charAt(i-1),dp[i][j-1]+(int)str2.charAt(j-1))); 
+                    // dp[i][j] = Math.min((int)str1.charAt(i-1)+(int)str2.charAt(j-1)+dp[i-1][j-1],Math.min(dp[i-1][j]+(int)str1.charAt(i-1),dp[i][j-1]+(int)str2.charAt(j-1))); 
+               
+                    dp[i][j] = Math.min(dp[i-1][j]+(int)str1.charAt(i-1),dp[i][j-1]+(int)str2.charAt(j-1)); 
                
                 }
             }
