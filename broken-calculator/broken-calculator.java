@@ -1,30 +1,26 @@
 class Solution {
     public int brokenCalc(int X, int Y) {
         
-        if(X==Y)
-            return 0;
+        int res=0;
         
-     int ans=0;
-         if(Y%2!=0)
-         {
-             Y+=1;
-             ans+=1;
-         }
-      
+        
+        
         while(Y>X)
         {
             if(Y%2!=0)
-            {
-                Y+=1;
-                ans+=1;
-            }
-            Y=Y/2;
-         //     System.out.println(X+" "+Y);
-            ans+=1;
+        {
+            res+=1;
+            Y+=1;
+        }
+            if(Y<=X)
+                break;
+            res+=1;
+            Y/=2;
+            
         }
         
-        return ans + X-Y;
-        
+        return res+Math.abs(X-Y);
+           
     }
 
    
@@ -33,3 +29,21 @@ class Solution {
 
 
   
+
+
+
+
+
+
+
+
+
+
+//  target- even -  divide by 2  >> start , find out diff 
+
+
+// --- , * 
+    
+//     3-1*2*2
+
+
