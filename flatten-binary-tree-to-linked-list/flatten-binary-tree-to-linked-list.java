@@ -22,34 +22,32 @@ class Solution {
     
     public TreeNode fn(TreeNode root)
     {
-        if(root==null)
-            return root;
-        if(root.left==null && root.right==null)
+       if(root==null)
+           return null;
+        
+        TreeNode a =  fn(root.left);
+        TreeNode b =  fn(root.right);
+        
+        if(a==null && b==null)
             return root;
         
-        TreeNode l = fn(root.left);
-        TreeNode r = fn(root.right);
+        if(a==null)
+            return b;
         
-        if(root.left==null)
-        {
-            return r;
-        }
-        else if(root.right==null)
-        {
-            root.right = root.left;
-            // V.IMP TO DO THIS
-            root.left=null;
-            return l;
-        }
-        else
-        {
-            TreeNode k = root.right;
-            root.right = root.left;
-            l.right =k;
-            // V IMP TO DO THIS
-            root.left=null;
-            return r;
-        } 
+       if(b==null)
+       {
+           root.right = root.left;
+           root.left = null;
+           
+           return a;
+       }
+        
+        
+        TreeNode k =  root.right;
+        root.right = root.left;
+        root.left = null;
+        a.right = k;
+        return b;
         
     }
    
