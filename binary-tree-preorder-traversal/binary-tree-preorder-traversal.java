@@ -81,14 +81,10 @@ class Solution {
         */
         
            while(root!=null)
-        {
-            
-                 
-
+        {  
             if(root.left==null)
             {
-                                   ll.add(root.val);
-
+                ll.add(root.val);
                 root=root.right;
             }
             else
@@ -99,13 +95,14 @@ class Solution {
                 
                 if(node.right==null)
                 {
-                           ll.add(root.val);
-
+                    ll.add(root.val);
                     node.right =root;
                     root = root.left;
+                    
                 }
                 else
                 {
+                    node.right=null;
                     root = root.right;
                    
                 }
