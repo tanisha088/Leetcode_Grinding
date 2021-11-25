@@ -14,7 +14,7 @@
  * }
  */
 class Solution {
-    
+    int ans=0;
         public int minCameraCover(TreeNode root) {
 
             // no camera at leaf node , 2 type -> 1. monitored 2. non-monitored 
@@ -63,42 +63,48 @@ class Solution {
     }
     
     */
-    if(root==null)
-        return 0;
-           int[] ar =  new int[]{0};
-    int k =  fn(root,ar);
+//     if(root==null)
+//         return 0;
+//            int[] ar =  new int[]{0};
+//     int k =  fn(root,ar);
+            
+//             if(k==-1)
+//                  ar[0]+=1;
+            
+//             return ar[0];
+            
+            int k =  fn(root);
             
             if(k==-1)
-                 ar[0]+=1;
+                return ans+1;
             
-            return ar[0];
+            return ans;
+            
+         
 } 
     
-    public int fn(TreeNode root,int[] ans)
+    // 1- actual   0-partial -1 - none
+    public int fn(TreeNode root)
     {
-        if(root==null)
-            return 0;
-        if(root.left==null && root.right==null)
-            return -1;
-        
-        int l = fn(root.left,ans);
-        int r = fn(root.right,ans);
-        
-        int el =  ans[0];
+             if(root==null)
+                 return 0;
            
-        if(l==-1 || r==-1)
+            int a = fn(root.left);
+        int b = fn(root.right);
+        
+        if(a==-1 || b==-1)
         {
-            ans[0]+=1;
+            ans+=1;
             return 1;
         }
         
-        if(l==0 && r==0)
-            return -1;
+        if(a==1 || b==1)
+            return 0;
         
-        
-            return  0;
+        return -1;
     }
 }
+
 
 
 
