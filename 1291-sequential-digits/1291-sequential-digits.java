@@ -3,7 +3,10 @@ class Solution {
         
         List<Integer> list=  new ArrayList();
         
+        ArrayList<Integer>[] array =  new ArrayList[9];
         
+        for(int i=0;i<9;i++)
+            array[i] = (new ArrayList());
         
        for(int i=1;i<=9;i++)
        {
@@ -15,12 +18,18 @@ class Solution {
                int number=Integer.parseInt(str.toString());
                if(number>=low && number<=high)
                {
-                   list.add(number);
+                   
+                  array[str.length()-1].add(number);
                }
            }
        }
         
-        Collections.sort(list);
+        for(int i=0;i<array.length;i++)
+        {
+            ArrayList<Integer> ll =  array[i];
+            for(int j=0;j<ll.size();j++)
+                list.add(ll.get(j));
+        }
         
         return list;
     }
