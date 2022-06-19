@@ -4,6 +4,7 @@ class Solution {
         
         HashMap<Integer,ArrayList<String>> map=  new HashMap();
         int maxCount = -1 ;
+        Arrays.sort(products);
         for(int i=0;i<products.length;i++)
         {
             String str =  products[i];
@@ -34,7 +35,6 @@ class Solution {
                 templist = new ArrayList();
             else
                 templist = map.get(i);
-            Collections.sort(templist);
             List<String> parts =  new ArrayList();
             for(int j=0;j<Math.min(3,templist.size());j++)
                 parts.add(templist.get(j));
